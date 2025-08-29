@@ -11,8 +11,8 @@ import Image from "next/image";
 export default function Sidebar() {
   return (
   <>
-    <div className="h-screen w-18 bg-gray-800 text-white p-4">
-        <div className="flex flex-col  items-center space-y-6 gap-4">
+    <div className="h-screen w-18 bg-gray-800 text-white p-4 border-r-1 border-gray-700">
+        <div className="flex flex-col  items-center space-y-6 gap-8 ">
             <Image 
               src="/logo-inicial.png" 
               alt="Logo"
