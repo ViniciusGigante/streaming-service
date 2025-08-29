@@ -1,13 +1,13 @@
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4 shadow-[inset_0_0_0_1000px_rgba(0,0,0,0.8)]"
+    <div className="min-h-screen  flex items-center justify-center px-4 "
           style={{
     backgroundImage: "url('/bg-landing.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
   }}
     >
-      <div className="max-w-md w-full space-y-8  p-8 rounded-lg shadow-lg">
+      <div className="max-w-md w-full space-y-8  p-8 rounded-lg shadow-lg bg-[rgba(245,245,245,0.06)] backdrop-blur-md">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold text-white">
             Login
@@ -25,7 +25,7 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-[rgba(255,255,255,0.15)]  bg-gray-800 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
                 placeholder="Digite seu email"
               />
             </div>
@@ -39,7 +39,7 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 required
-                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-[rgba(255,255,255,0.15)]  bg-gray-800 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
                 placeholder="Digite sua senha"
               />
             </div>

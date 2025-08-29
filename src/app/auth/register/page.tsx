@@ -1,12 +1,12 @@
 export default function RegisterPage() {
-  return (<div className="min-h-screen bg-black flex items-center justify-center px-4 shadow-[inset_0_0_0_1000px_rgba(0,0,0,0.8)]"
+  return (<div className="min-h-screen  flex items-center justify-center px-4 "
           style={{
     backgroundImage: "url('/bg-landing.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
   }}
     >
-    <div className="max-w-md w-full space-y-8">
+    <div className="max-w-md w-full space-y-8 p-10 bg-[rgba(245,245,245,0.06)] backdrop-blur-md">
         <div>
           <h2 className="text-center text-3xl font-bold text-white">
             Criar Conta
