@@ -21,7 +21,7 @@ export default function Sidebar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Monitoramento de scroll
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -37,7 +37,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Barra superior em mobile/tablet */}
+    
       <div
         className={`
           fixed top-0 left-0 w-full h-16 flex items-center justify-between px-4 md:hidden z-50 border-b border-slate-900
@@ -45,7 +45,7 @@ export default function Sidebar() {
           ${scrolled ? 'bg-transparent' : 'bg-gray-800'}
         `}
       >
-        {/* Logo à esquerda */}
+     
         <Image
           src="/cineverse-logo.svg"
           width={270}
@@ -53,27 +53,27 @@ export default function Sidebar() {
           alt="Cineverse Logo"
         />
 
-        {/* Botão de menu à direita */}
+       
         <button onClick={() => setMenuOpen(true)} className="text-white text-2xl font-bold mr-10">
           ☰
         </button>
       </div>
 
-      {/* Sidebar vertical em desktop */}
+    
       <div className="hidden md:flex fixed top-0 left-0 h-screen w-20 bg-gray-800 text-white flex-col items-center gap-8 p-4 border-r border-slate-900">
         {menuItems.map(({ icon: Icon }, idx) => (
           <Icon key={idx} className="w-6 h-6" />
         ))}
       </div>
 
-      {/* Menu lateral em mobile/tablet abrindo da direita */}
+     
       <div
         className={`fixed top-0 right-0 h-screen w-64 bg-gray-800 text-white z-50 flex flex-col p-4 gap-6
           transform transition-transform duration-300 ease-in-out
           ${menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
         `}
       >
-        {/* Botão de fechar no canto superior direito */}
+      
         <button className="self-end text-2xl mb-4" onClick={() => setMenuOpen(false)}>
           ✕
         </button>

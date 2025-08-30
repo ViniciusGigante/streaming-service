@@ -2,7 +2,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen  flex items-center justify-center px-4 "
           style={{
-    backgroundImage: "url('/bg-landing.png')",
+    backgroundImage: "url('/background-home.png')",
     backgroundSize: "cover",
     backgroundPosition: "center",
   }}
