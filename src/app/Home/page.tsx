@@ -9,7 +9,7 @@ export default function HomePage() {
        <main className=" w-full min-h-screen bg-[#b8b8b8]">
   <Sidebar />
   <section 
-    className="min-h-screen relative flex-1 bg-[#1E1E1E] text-white ml-20"
+    className="min-h-screen relative flex-1 bg-[#1E1E1E] text-white md:ml-20 md:pt-0"
     style={{
       padding: "20px",
       backgroundImage: "url('/background-home.png')",
