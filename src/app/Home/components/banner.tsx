@@ -5,7 +5,7 @@ export default function Banner() {
     return(
         <>
             <div
-  style={{minHeight:'300px', marginTop: '50px', padding: '20px', borderRadius: '8px', 
+  style={{minHeight:'400px', marginTop: '50px', padding: '20px', borderRadius: '8px', 
     display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'flex-start'}}
   >
     {/* Nome do filme */}
