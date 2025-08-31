@@ -9,7 +9,7 @@ export default function Perfil() {
         <div className="flex items-center gap-6 mb-10">
           <div className="w-32 h-32 rounded-full bg-gray-700 border-4 border-[#0f0f0f]"></div>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold">Nome do Usuário</h1>
+            <h1 className="text-3xl font-bold ">Nome do Usuário</h1>
             <p className="text-gray-400">usuario@email.com</p>
             <button className="mt-3 px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-700 text-sm">
               Editar Perfil
