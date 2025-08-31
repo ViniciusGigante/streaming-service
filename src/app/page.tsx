@@ -1,9 +1,17 @@
-import Image from "next/image";
+'use client'
 
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import React from "react";
 
 export default function Home() {
+
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/auth/login")
+  }
+
   return (
     <div>
      
@@ -40,12 +48,21 @@ export default function Home() {
   </p>
   <div className="flex space-x-4 z-20">
     <button
-      className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 z-20"
+    onClick={handleClick}
+      className="mt-6 inline-block bg-blue-600 hover:bg-blue-700
+       text-white font-semibold py-3 px-6 rounded-lg transition duration-300 z-20
+       cursor-pointer
+       "
+      
     >
       Entrar
     </button>    
     <button
-      className="mt-6 ml-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 z-20"
+      className="mt-6 ml-4 inline-block bg-blue-600 hover:bg-blue-700
+       text-white font-semibold py-3 px-6 rounded-lg transition 
+       duration-300 z-20
+       cursor-pointer
+       "
     >
       Saiba Mais
     </button>
