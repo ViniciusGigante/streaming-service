@@ -1,0 +1,68 @@
+// ----------------------
+// 1. User (conta principal)
+// ----------------------
+{
+  _id: ObjectId,
+  username: string,
+  email: string,         // único
+  password: string,      // hash
+  createdAt: Date,
+  updatedAt: Date
+}
+
+// ----------------------
+// 2. Profiles (vários perfis por User)
+// ----------------------
+{
+  _id: ObjectId,
+  name: string,          // nome do perfil
+  accountEmail: string,  // referência ao email da conta principal
+  avatarColor?: string,  // opcional
+  createdAt: Date,
+  updatedAt: Date
+}
+
+// ----------------------
+// 3. Movies
+// ----------------------
+{
+  _id: ObjectId,
+  title: string,
+  description: string,
+  categories: ObjectId[], // array de categoryId
+  releaseDate: Date,
+  thumbnailUrl: string,
+  videoUrl: string
+}
+
+// ----------------------
+// 4. Categories
+// ----------------------
+{
+  _id: ObjectId,
+  name: string,
+  description?: string
+}
+
+// ----------------------
+// 5. Lists (listas de filmes criadas por perfil)
+// ----------------------
+{
+  _id: ObjectId,
+  profileId: ObjectId,   // referência ao perfil dono da lista
+  name: string,
+  movieIds: ObjectId[],  // array de filmes
+  createdAt: Date,
+  updatedAt: Date
+}
+
+// ----------------------
+// 6. History (histórico de filmes assistidos)
+// ----------------------
+{
+  _id: ObjectId,
+  profileId: ObjectId,   // referência ao perfil
+  movieId: ObjectId,
+  watchedPercentage: number, // 0 a 100
+  watchedAt: Date
+}
