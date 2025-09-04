@@ -17,7 +17,7 @@ if (!global._mongoClientPromise) {
   global._mongoClientPromise = clientPromise;
 }
 
-export async function getDatabase() {
+export default async function getDatabase() {
   const client = await clientPromise;
   return client.db(dbName);
 }
