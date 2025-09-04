@@ -29,7 +29,7 @@ export default function LoginPage() {
       } else {
         // Armazena o token JWT localmente
         localStorage.setItem("token", data.token);
-        router.push("/Home"); // redireciona para a página principal
+        router.push("/perfis"); // 
       }
     } catch (error) {
       console.error(error);

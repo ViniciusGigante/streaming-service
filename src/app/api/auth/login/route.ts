@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
       {
         userId: user._id.toString(),
         username: user.username,
+        email: user.email,
       },
       secret,
       options
