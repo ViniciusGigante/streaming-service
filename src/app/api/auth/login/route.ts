@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDatabase } from "@/lib/mongodb";
+import  getDatabase  from "@/lib/mongodb";
 import bcrypt from "bcrypt";
 import jwt, { SignOptions, Secret } from "jsonwebtoken";
 

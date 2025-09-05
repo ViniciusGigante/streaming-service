@@ -1,7 +1,11 @@
 "use client";
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function RegisterPage() {
+
+  const router = useRouter();
 
   const [form, setForm] = useState({
     name: '',
@@ -56,6 +60,7 @@ export default function RegisterPage() {
           confirmPassword: "",
           termsAccepted: false,
         });
+        router.push("/auth/login");
       }
     } catch (error) {
       console.error(error);
@@ -184,6 +189,17 @@ export default function RegisterPage() {
             </button>
           </div>
         </form>
+        <div className="mt-4 text-center">
+  <button
+    type="button"
+    className="flex items-center justify-center gap-2 mx-auto px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-600 transition-colors"
+    onClick={() => router.push("/auth/login")}
+  >
+    <ArrowRightOnRectangleIcon className="w-4 h-4" />
+    Voltar para Login
+  </button>
+</div>
+
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,10 +17,12 @@ export default function LoginPage() {
     setMessage("");
 
     try {
+      
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        credentials: "include", 
       });
 
       const data = await res.json();
@@ -27,9 +30,7 @@ export default function LoginPage() {
       if (!res.ok) {
         setMessage(data.message || "Erro ao fazer login");
       } else {
-        // Armazena o token JWT localmente
-        localStorage.setItem("token", data.token);
-        router.push("/perfis"); // 
+        router.push("/perfis");
       }
     } catch (error) {
       console.error(error);
@@ -119,11 +120,25 @@ export default function LoginPage() {
           </button>
 
           <div className="text-center">
-            <button type="button" className="text-sm text-gray-400 hover:text-gray-300">
+            <button 
+              onClick={() => router.push('/auth/register')}
+              type="button" className="text-sm text-gray-400 hover:text-gray-300"
+            >
               Não tem conta? Criar agora
             </button>
           </div>
         </form>
+
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            className="flex items-center justify-center gap-2 mx-auto px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-600 transition-colors"
+            onClick={() => router.push("/")}
+          >
+            <ArrowRightOnRectangleIcon className="w-4 h-4" />
+            Voltar para Login
+          </button>
+        </div>
       </div>
     </div>
   );
