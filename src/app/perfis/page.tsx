@@ -16,32 +16,22 @@ export default function SelecaoPerfilPage() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
 
-useEffect(() => {
-  async function fetchProfiles() {
-    try {
-      const res = await fetch("/api/perfis", { credentials: "include" });
-      
-      // Log do status da requisição
-      console.log("Status da requisição /api/perfis:", res.status);
-      
-      const data = await res.json();
-      
-      // Log da resposta
-      console.log("Resposta de /api/perfis:", data);
+  useEffect(() => {
+    async function fetchProfiles() {
+      try {
+        const res = await fetch("/api/perfis", { credentials: "include" });
+        const data = await res.json();
 
-      if (res.ok) {
-        setProfiles(data.profiles);
-      } else {
-        console.error(data.message);
+        if (res.ok) {
+          setProfiles(data.profiles);
+        }
+      } catch (err) {
+        console.error("Erro ao buscar perfis:", err);
       }
-    } catch (err) {
-      console.error("Erro ao buscar perfis:", err);
     }
-  }
 
-  fetchProfiles();
-}, []);
-
+    fetchProfiles();
+  }, []);
 
   const handleSelectProfile = (profile: Profile) => {
     localStorage.setItem("activeProfile", JSON.stringify(profile));

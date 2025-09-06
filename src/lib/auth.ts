@@ -6,12 +6,14 @@ interface Payload extends JwtPayload {
   email: string;
 }
 
-export function validateToken(token: string): Payload | null {
+export function validateToken(token: string | undefined): Payload | null {
+  if (!token) return null;
+
   try {
     const secret = process.env.JWT_SECRET!;
     const payload = jwt.verify(token, secret) as Payload;
     return payload;
-  } catch (error) {
+  } catch (err) {
     return null;
   }
 }
