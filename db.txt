@@ -27,13 +27,15 @@
 // ----------------------
 {
   _id: ObjectId,
-  title: string,
+  title: string,             // Nome real com acentos e espaços
   description: string,
-  categories: ObjectId[], // array de categoryId
-  releaseDate: Date,
-  thumbnailUrl: string,
-  videoUrl: string
+  categories: ObjectId[],    // Array de categorias
+  releaseYear: number,       // Ano de lançamento
+  thumbnailUrl: string,      // Caminho relativo do poster
+  videoUrl: string,          // Link do vídeo
+  isNewRelease: boolean      // Lançamento ou não
 }
+
 
 // ----------------------
 // 4. Categories
@@ -65,4 +67,17 @@
   movieId: ObjectId,
   watchedPercentage: number, // 0 a 100
   watchedAt: Date
+}
+// ----------------------
+// 7. Episodes (episódios de séries)
+// ----------------------
+{
+  _id: ObjectId,
+  seasonId: ObjectId,      // referência à temporada (Season)
+  episodeNumber: number,   // número do episódio dentro da temporada
+  title: string,           // título do episódio
+  description: string,     // descrição curta
+  videoUrl: string,        // link do trailer ou episódio
+  duration: number,        // duração em minutos (opcional)
+  thumbnailUrl: string     // capa do episódio
 }

@@ -12,6 +12,7 @@ interface Profile {
 }
 
 export default function SelecaoPerfilPage() {
+
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
