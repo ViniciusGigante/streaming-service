@@ -1,0 +1,22 @@
+db.Categories.insertMany([
+  { name: "Ação", description: "Filmes cheios de ação e aventura" },
+  { name: "Aventura", description: "Filmes de exploração, viagens e jornadas" },
+  { name: "Comédia", description: "Filmes para rir e se divertir" },
+  { name: "Drama", description: "Filmes com enredos emocionais e intensos" },
+  { name: "Fantasia", description: "Filmes com elementos mágicos ou sobrenaturais" },
+  { name: "Ficção Científica", description: "Filmes com tecnologia, futuro ou espaço" },
+  { name: "Romance", description: "Filmes centrados em relacionamentos amorosos" },
+  { name: "Terror", description: "Filmes para assustar e criar tensão" },
+  { name: "Suspense", description: "Filmes que mantêm o espectador em expectativa" },
+  { name: "Thriller", description: "Filmes de tensão intensa e mistério" },
+  { name: "Infantil", description: "Filmes voltados para crianças" },
+  { name: "Animação", description: "Filmes animados" },
+  { name: "Musical", description: "Filmes com números musicais" },
+  { name: "História", description: "Filmes baseados em eventos históricos" },
+  { name: "Guerra", description: "Filmes sobre conflitos e batalhas" },
+  { name: "Policial", description: "Filmes com investigação e crimes" },
+  { name: "Biografia", description: "Filmes sobre a vida de pessoas reais" },
+  { name: "Super-Heróis", description: "Filmes de heróis e quadrinhos" },
+  { name: "Mistério", description: "Filmes com enigmas e investigações" },
+  { name: "Esporte", description: "Filmes sobre esportes e atletas" }
+])

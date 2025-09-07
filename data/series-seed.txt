@@ -1,0 +1,128 @@
+[
+  {
+    title: "Black Clover",
+    description: "A história de Asta e Yuno, dois órfãos que buscam se tornar o Rei Mago.\nCheio de magia, aventura e batalhas emocionantes.",
+    categories: ["Anime", "Aventura", "Fantasia"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/black_cover.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Boku no Hero Academia",
+    description: "Em um mundo onde quase todos têm superpoderes, Izuku Midoriya sonha em se tornar um herói.\nDrama, ação e super-heróis em cada episódio.",
+    categories: ["Anime", "Ação", "Super-Heróis"],
+    releaseYear: 2016,
+    thumbnailUrl: "/posters/boku_no_hero_academy.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Breaking Bad",
+    description: "Walter White, um professor de química, se torna fabricante de metanfetamina.\nDrama intenso com crime, suspense e reviravoltas.",
+    categories: ["Série", "Drama", "Crime"],
+    releaseYear: 2008,
+    thumbnailUrl: "/posters/breaking_bad.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Dr. House",
+    description: "O médico brilhante e mal-humorado diagnostica casos complexos.\nDrama hospitalar, mistério e humor ácido.",
+    categories: ["Série", "Drama", "Mistério"],
+    releaseYear: 2004,
+    thumbnailUrl: "/posters/dr_house.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Dragon Ball Z",
+    description: "Goku e seus amigos defendem a Terra de inimigos poderosos.\nAção intensa, aventura e artes marciais em cada episódio.",
+    categories: ["Anime", "Ação", "Aventura"],
+    releaseYear: 1989,
+    thumbnailUrl: "/posters/dragon_ball_z.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Hunter x Hunter",
+    description: "Gon Freecss se torna caçador para encontrar seu pai.\nAventura, ação e descobertas incríveis pelo mundo.",
+    categories: ["Anime", "Ação", "Aventura"],
+    releaseYear: 1999,
+    thumbnailUrl: "/posters/hunter_x_hunter.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "JoJo’s Bizarre Adventure",
+    description: "A saga dos membros da família Joestar e suas batalhas contra inimigos sobrenaturais.\nAção, fantasia e drama únicos.",
+    categories: ["Anime", "Ação", "Fantasia"],
+    releaseYear: 2012,
+    thumbnailUrl: "/posters/jojo_bizarre_adventure.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Kimetsu no Yaiba",
+    description: "Tanjiro Kamado busca vingança e cura para sua irmã transformada em demônio.\nAção, aventura e fantasia sombria.",
+    categories: ["Anime", "Ação", "Fantasia"],
+    releaseYear: 2019,
+    thumbnailUrl: "/posters/kimetsu_no_yaiba.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Naruto Shippuden",
+    description: "Naruto e seus amigos ninjas enfrentam desafios para proteger sua vila.\nAventura, ação e crescimento pessoal de cada personagem.",
+    categories: ["Anime", "Ação", "Aventura"],
+    releaseYear: 2007,
+    thumbnailUrl: "/posters/naruto_shippuden.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "One Punch Man",
+    description: "Saitama derrota qualquer inimigo com um soco, mas busca emoção na vida.\nAção, comédia e super-heróis em um universo único.",
+    categories: ["Anime", "Ação", "Super-Heróis"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/one_punch_man.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Prison Break",
+    description: "Irmãos tentam escapar de uma prisão de alta segurança.\nDrama, ação e estratégia em cada episódio.",
+    categories: ["Série", "Drama", "Suspense"],
+    releaseYear: 2005,
+    thumbnailUrl: "/posters/prison_break.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Round 6",
+    description: "Jogadores endividados participam de jogos mortais em busca de dinheiro.\nSuspense, drama e crítica social intensa.",
+    categories: ["Série", "Suspense", "Drama"],
+    releaseYear: 2021,
+    thumbnailUrl: "/posters/round_6.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    title: "Shingeki no Kyojin",
+    description: "Humanidade luta contra Titãs gigantes para sobreviver.\nAção épica, drama e fantasia sombria em cada episódio.",
+    categories: ["Anime", "Ação", "Fantasia"],
+    releaseYear: 2013,
+    thumbnailUrl: "/posters/shingeky_no_kyojin.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    title: "Wandinha",
+    description: "Wandinha Addams investiga mistérios em sua escola e enfrenta perigos.\nComédia sombria, mistério e drama adolescente.",
+    categories: ["Série", "Comédia", "Mistério"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/wandinha.webp",
+    videoUrl: "",
+    isNewRelease: true
+  }
+]

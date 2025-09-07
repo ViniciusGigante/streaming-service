@@ -1,0 +1,773 @@
+[
+  {
+    _id: ObjectId(),
+    title: "A Origem",
+    description: "Dom Cobb é um ladrão especializado em extrair segredos do subconsciente durante o sono.\nQuando recebe a missão de plantar uma ideia, sua vida muda completamente.",
+    categories: ["Ação", "Ficção Científica"],
+    releaseYear: 2010,
+    thumbnailUrl: "/posters/a_origem.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Adão Negro",
+    description: "Há muito tempo, Teth-Adam foi dotado de poderes divinos e se tornou Adão Negro.\nAgora ele emerge para enfrentar o mundo moderno e seus heróis.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/adao_negro.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Avatar",
+    description: "Jake Sully se junta ao programa Avatar e conhece Pandora, um mundo repleto de vida e cultura únicas.\nEle deve escolher entre sua humanidade e seu coração novo.",
+    categories: ["Aventura", "Ficção Científica"],
+    releaseYear: 2009,
+    thumbnailUrl: "/posters/avatar.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Avatar: O Caminho da Água",
+    description: "Jake e Neytiri exploram os oceanos de Pandora enquanto enfrentam novas ameaças.\nA luta pelo equilíbrio de Pandora continua com intensidade e emoção.",
+    categories: ["Aventura", "Fantasia"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/avatar_caminho_da_agua.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Avatar: Fogo e Cinzas",
+    description: "Os habitantes de Pandora enfrentam desafios naturais e humanos.\nA sobrevivência do planeta depende de coragem, união e sacrifício.",
+    categories: ["Aventura", "Fantasia"],
+    releaseYear: 2024,
+    thumbnailUrl: "/posters/avatar_fogo_e_cinzas.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Bastardos Inglórios",
+    description: "Durante a Segunda Guerra Mundial, um grupo de soldados judeus planeja eliminar líderes nazistas.\nA tensão cresce enquanto cada personagem luta por vingança e justiça.",
+    categories: ["Ação", "Drama"],
+    releaseYear: 2009,
+    thumbnailUrl: "/posters/bastardos_inglorios.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Batman: O Cavaleiro das Trevas",
+    description: "Batman enfrenta o Coringa em Gotham, desafiando seus próprios limites e a moral da cidade.\nUm jogo de inteligência, caos e coragem se desenrola nas sombras.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2008,
+    thumbnailUrl: "/posters/batman_cavaleiro_das_trevas.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Batman: O Cavaleiro das Trevas Ressurge",
+    description: "O retorno do Cavaleiro das Trevas traz desafios e novos inimigos para Gotham.\nSegredos do passado e ameaças atuais colocam a cidade à beira do colapso.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2012,
+    thumbnailUrl: "/posters/batman_cavaleiro_das_trevas_ressurge.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Beekeeper",
+    description: "Um apicultor luta para proteger suas abelhas e seu legado.\nEntre desafios ambientais e pessoais, ele descobre a importância da natureza.",
+    categories: ["Drama", "História"],
+    releaseYear: 2021,
+    thumbnailUrl: "/posters/beekeeper.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Carros 3",
+    description: "Relâmpago McQueen enfrenta novos desafios na pista e precisa provar que ainda é o melhor.\nCom a ajuda de novos amigos, ele descobre o verdadeiro significado da corrida.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/carros_3.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Cinquenta Tons de Cinza",
+    description: "A jovem Anastasia conhece o enigmático Christian Grey, iniciando um relacionamento intenso e complicado.\nEntre desejo e segredos, eles exploram limites e paixões.",
+    categories: ["Romance", "Drama"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/cinquenta_tons_de_cinza.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Clube da Luta",
+    description: "Um homem insatisfeito com sua vida forma um clube secreto para homens que buscam escapar da rotina.\nViolência, amizade e autodescoberta se entrelaçam nessa história impactante.",
+    categories: ["Drama", "Suspense"],
+    releaseYear: 1999,
+    thumbnailUrl: "/posters/clube_da_luta.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Como Treinar o Seu Dragão",
+    description: "Soluço descobre que dragões não são inimigos e forma uma amizade inesperada com um dragão ferido.\nA vila e o jovem aprendiz enfrentarão desafios que mudarão suas vidas para sempre.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2010,
+    thumbnailUrl: "/posters/como_treinar_seu_dragao.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Contagem Regressiva",
+    description: "Um grupo de amigos descobre um aplicativo mortal que prevê a hora da morte.\nAgora precisam correr contra o tempo para sobreviver ao jogo letal.",
+    categories: ["Terror", "Suspense"],
+    releaseYear: 2019,
+    thumbnailUrl: "/posters/contagem_regressiva.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Deadpool",
+    description: "Wade Wilson, um mercenário sarcástico, ganha habilidades de cura acelerada.\nCom muito humor e ação, ele busca vingança contra aqueles que destruíram sua vida.",
+    categories: ["Ação", "Comédia"],
+    releaseYear: 2016,
+    thumbnailUrl: "/posters/deadpool.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Deadpool & Wolverine",
+    description: "Deadpool se une a Wolverine em uma missão perigosa.\nO humor ácido e a ação intensa transformam essa parceria em uma aventura inesquecível.",
+    categories: ["Ação", "Comédia"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/deadpool_e_wolverine.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Divertidamente 2",
+    description: "Alegria, Tristeza e as emoções da jovem Riley enfrentam novos desafios enquanto ela cresce.\nDescubra como as emoções moldam suas decisões e relações.",
+    categories: ["Animação", "Comédia"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/divertidamente_2.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Django Livre",
+    description: "Django, um escravo liberto, busca salvar sua esposa das mãos de um cruel fazendeiro.\nA vingança e a justiça são o fio condutor dessa história intensa.",
+    categories: ["Ação", "Western"],
+    releaseYear: 2012,
+    thumbnailUrl: "/posters/django_livre.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Doutor Estranho no Multiverso da Loucura",
+    description: "Stephen Strange explora o multiverso e enfrenta ameaças que desafiam a realidade.\nMagia, coragem e perigos desconhecidos se entrelaçam nessa aventura épica.",
+    categories: ["Ação", "Fantasia"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/doutor_estranho_no_multiverso_da_loucura.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Carros 3",
+    description: "Relâmpago McQueen enfrenta novos desafios na pista e precisa provar que ainda é o melhor.\nCom a ajuda de novos amigos, ele descobre o verdadeiro significado da corrida.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/carros_3.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Cinquenta Tons de Cinza",
+    description: "A jovem Anastasia conhece o enigmático Christian Grey, iniciando um relacionamento intenso e complicado.\nEntre desejo e segredos, eles exploram limites e paixões.",
+    categories: ["Romance", "Drama"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/cinquenta_tons_de_cinza.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Clube da Luta",
+    description: "Um homem insatisfeito com sua vida forma um clube secreto para homens que buscam escapar da rotina.\nViolência, amizade e autodescoberta se entrelaçam nessa história impactante.",
+    categories: ["Drama", "Suspense"],
+    releaseYear: 1999,
+    thumbnailUrl: "/posters/clube_da_luta.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Como Treinar o Seu Dragão",
+    description: "Soluço descobre que dragões não são inimigos e forma uma amizade inesperada com um dragão ferido.\nA vila e o jovem aprendiz enfrentarão desafios que mudarão suas vidas para sempre.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2010,
+    thumbnailUrl: "/posters/como_treinar_seu_dragao.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Contagem Regressiva",
+    description: "Um grupo de amigos descobre um aplicativo mortal que prevê a hora da morte.\nAgora precisam correr contra o tempo para sobreviver ao jogo letal.",
+    categories: ["Terror", "Suspense"],
+    releaseYear: 2019,
+    thumbnailUrl: "/posters/contagem_regressiva.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Deadpool",
+    description: "Wade Wilson, um mercenário sarcástico, ganha habilidades de cura acelerada.\nCom muito humor e ação, ele busca vingança contra aqueles que destruíram sua vida.",
+    categories: ["Ação", "Comédia"],
+    releaseYear: 2016,
+    thumbnailUrl: "/posters/deadpool.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Deadpool & Wolverine",
+    description: "Deadpool se une a Wolverine em uma missão perigosa.\nO humor ácido e a ação intensa transformam essa parceria em uma aventura inesquecível.",
+    categories: ["Ação", "Comédia"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/deadpool_e_wolverine.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Divertidamente 2",
+    description: "Alegria, Tristeza e as emoções da jovem Riley enfrentam novos desafios enquanto ela cresce.\nDescubra como as emoções moldam suas decisões e relações.",
+    categories: ["Animação", "Comédia"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/divertidamente_2.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Django Livre",
+    description: "Django, um escravo liberto, busca salvar sua esposa das mãos de um cruel fazendeiro.\nA vingança e a justiça são o fio condutor dessa história intensa.",
+    categories: ["Ação", "Western"],
+    releaseYear: 2012,
+    thumbnailUrl: "/posters/django_livre.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Doutor Estranho no Multiverso da Loucura",
+    description: "Stephen Strange explora o multiverso e enfrenta ameaças que desafiam a realidade.\nMagia, coragem e perigos desconhecidos se entrelaçam nessa aventura épica.",
+    categories: ["Ação", "Fantasia"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/doutor_estranho_no_multiverso_da_loucura.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Fallout",
+    description: "Ethan Hunt precisa impedir que uma ameaça global destrua a paz mundial.\nAcrobacias, espionagem e reviravoltas em uma missão cheia de adrenalina.",
+    categories: ["Ação", "Thriller"],
+    releaseYear: 2018,
+    thumbnailUrl: "/posters/fallout.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Forrest Gump: O Contador de Histórias",
+    description: "Forrest Gump narra sua vida extraordinária, cheia de encontros históricos e aventuras emocionantes.\nUm relato de inocência, amor e determinação.",
+    categories: ["Drama", "Romance"],
+    releaseYear: 1994,
+    thumbnailUrl: "/posters/forrest_gump_o_contador_de_historias.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Gato de Botas: O Último Pedido",
+    description: "Gato de Botas embarca em uma aventura épica para restaurar sua sorte.\nHumor, ação e emoção em uma jornada inesquecível pelo mundo dos contos de fada.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/gato_de_botas_o_ultimo_pedido.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Gladiador",
+    description: "Maximus, um general romano traído, luta para vingar sua família e restaurar a justiça.\nUma história de coragem, honra e glória no império romano.",
+    categories: ["Ação", "Drama"],
+    releaseYear: 2000,
+    thumbnailUrl: "/posters/gladiador.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Guerra Mundial Z",
+    description: "Um investigador da ONU luta para salvar a humanidade durante uma pandemia zumbi global.\nTensão, ação e suspense em uma corrida contra o tempo.",
+    categories: ["Ação", "Thriller"],
+    releaseYear: 2013,
+    thumbnailUrl: "/posters/guerra_mundial_z.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Homem-Aranha no Aranhaverso",
+    description: "Miles Morales descobre o multiverso e encontra diferentes versões do Homem-Aranha.\nAventura animada cheia de ação, cores e emoção.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2018,
+    thumbnailUrl: "/posters/homem_aranha_no_aranhaverso.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Homem-Aranha: Sem Volta Para Casa",
+    description: "Peter Parker enfrenta ameaças de outros universos e precisa proteger quem ama.\nAção intensa, emoção e o multiverso colidem nesta aventura épica.",
+    categories: ["Ação", "Aventura"],
+    releaseYear: 2021,
+    thumbnailUrl: "/posters/homem_aranha_sem_volta_para_casa.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Independence Day",
+    description: "Humanidade enfrenta uma invasão alienígena em uma batalha épica pela sobrevivência.\nHeróis improváveis surgem em meio à destruição e esperança.",
+    categories: ["Ação", "Ficção Científica"],
+    releaseYear: 1996,
+    thumbnailUrl: "/posters/indenpendence_day.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Indomável",
+    description: "Uma jovem enfrenta adversidades em sua vida pessoal e encontra força para superar desafios.\nDrama intenso sobre resiliência e coragem.",
+    categories: ["Drama", "Romance"],
+    releaseYear: 2011,
+    thumbnailUrl: "/posters/indomavel.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Interestelar",
+    description: "Um grupo de astronautas viaja pelo espaço em busca de um novo lar para a humanidade.\nCiência, emoção e exploração em uma odisseia épica pelo cosmos.",
+    categories: ["Ficção Científica", "Drama"],
+    releaseYear: 2014,
+    thumbnailUrl: "/posters/interestelar.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+   {
+    _id: ObjectId(),
+    title: "Invocação do Mal 4",
+    description: "Investigadores paranormais enfrentam um dos casos mais aterrorizantes de suas carreiras.\nMistério, suspense e fenômenos sobrenaturais colocam suas vidas à prova.",
+    categories: ["Terror", "Suspense"],
+    releaseYear: 2023,
+    thumbnailUrl: "/posters/invocacao-do-mal_4.jpg",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "John Wick 4",
+    description: "John Wick continua sua luta contra a Alta Cúpula do crime, buscando vingança.\nAção intensa, coreografias impressionantes e uma jornada de sobrevivência.",
+    categories: ["Ação", "Thriller"],
+    releaseYear: 2023,
+    thumbnailUrl: "/posters/jhon_wick_4.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "John Wick 3",
+    description: "John Wick é caçado por assassinos em todo o mundo após quebrar as regras do submundo.\nAção contínua e suspense em ritmo eletrizante.",
+    categories: ["Ação", "Thriller"],
+    releaseYear: 2019,
+    thumbnailUrl: "/posters/john_wick_3.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Lilo & Stitch",
+    description: "A amizade improvável entre Lilo e Stitch mostra que família é mais do que sangue.\nComédia e aventura em um enredo cheio de ternura e emoção.",
+    categories: ["Animação", "Comédia"],
+    releaseYear: 2002,
+    thumbnailUrl: "/posters/lilo_stich.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Mad Max: Estrada da Fúria",
+    description: "Max e Furiosa fogem de um tirano em um mundo pós-apocalíptico, buscando liberdade.\nAção explosiva, perseguições de tirar o fôlego e cenários desérticos épicos.",
+    categories: ["Ação", "Aventura"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/mad_max_estrada_da_furia.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Matrix",
+    description: "Neo descobre a verdade sobre a realidade e a luta contra as máquinas.\nFicção científica revolucionária com ação e filosofia em um mundo digital.",
+    categories: ["Ação", "Ficção Científica"],
+    releaseYear: 1999,
+    thumbnailUrl: "/posters/matrix.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Meu Malvado Favorito 4",
+    description: "Gru enfrenta novos desafios e vilões enquanto cuida de sua família.\nAnimação divertida, cheia de humor e aventuras familiares.",
+    categories: ["Animação", "Comédia"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/meu_malvado_favorito_4.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Minecraft",
+    description: "Uma aventura épica baseada no universo de Minecraft, explorando mundos e construções.\nAção e criatividade em um filme cheio de imaginação.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2025,
+    thumbnailUrl: "/posters/minecraft.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Missão Impossível",
+    description: "Ethan Hunt e sua equipe enfrentam missões impossíveis para salvar o mundo.\nEspionagem, ação e suspense em ritmo eletrizante.",
+    categories: ["Ação", "Thriller"],
+    releaseYear: 1996,
+    thumbnailUrl: "/posters/missao_impossivel.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Mufasa: O Rei Leão",
+    description: "A história do jovem Mufasa antes de se tornar rei.\nAventura, emoção e lições sobre responsabilidade e coragem.",
+    categories: ["Animação", "Aventura"],
+    releaseYear: 2024,
+    thumbnailUrl: "/posters/mufasa_rei_leao.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+   {
+    _id: ObjectId(),
+    title: "Mulher-Maravilha",
+    description: "Diana, princesa das Amazonas, descobre seus poderes e luta pela paz no mundo dos homens.\nAção e aventura com heroísmo e empoderamento feminino.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2017,
+    thumbnailUrl: "/posters/mulher_maravilha.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "O Diabo Veste Prada",
+    description: "Uma jovem enfrenta os desafios de trabalhar na revista de moda mais poderosa do mundo.\nComédia dramática sobre trabalho, ambição e autodescoberta.",
+    categories: ["Comédia", "Drama"],
+    releaseYear: 2006,
+    thumbnailUrl: "/posters/o_diabo_veste_prada.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "O Hobbit: A Desolação de Smaug",
+    description: "Bilbo Bolseiro continua sua jornada com os anões, enfrentando o dragão Smaug.\nAventura épica com fantasia e perigos em cada passo da jornada.",
+    categories: ["Aventura", "Fantasia"],
+    releaseYear: 2013,
+    thumbnailUrl: "/posters/o_hobbit_a_desolacao_de_smaug.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "O Mapa Que Me Leva Até Você",
+    description: "Uma emocionante história de romance e destinos cruzados ao redor do mundo.\nComédia romântica com viagens e encontros inesperados.",
+    categories: ["Romance", "Comédia"],
+    releaseYear: 2020,
+    thumbnailUrl: "/posters/o_mapa_que_me_leva_ate_voce.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "O Poderoso Chefão",
+    description: "A história da família Corleone, o poder, a lealdade e a violência no submundo.\nDrama criminal e suspense em um dos clássicos mais aclamados do cinema.",
+    categories: ["Drama", "Policial"],
+    releaseYear: 1972,
+    thumbnailUrl: "/posters/o_poderoso_chefao.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Oppenheimer",
+    description: "A vida de J. Robert Oppenheimer e seu papel no desenvolvimento da bomba atômica.\nDrama histórico e biografia com profundidade e dilemas morais.",
+    categories: ["História", "Biografia"],
+    releaseYear: 2023,
+    thumbnailUrl: "/posters/oppenheimer.jpg",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Os Incríveis 2",
+    description: "A família de super-heróis enfrenta novos desafios e vilões enquanto lida com a vida cotidiana.\nAnimação divertida com ação, comédia e valores familiares.",
+    categories: ["Animação", "Super-Heróis"],
+    releaseYear: 2018,
+    thumbnailUrl: "/posters/os_incriveis_2.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Percy Jackson e o Ladrão de Raios",
+    description: "Percy descobre ser filho de um deus grego e embarca em uma missão para salvar o mundo.\nAventura e fantasia com mitologia moderna e ação emocionante.",
+    categories: ["Aventura", "Fantasia"],
+    releaseYear: 2010,
+    thumbnailUrl: "/posters/percy_jackson_e_o_ladrao_de_raios.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Perdido em Marte",
+    description: "Um astronauta fica preso em Marte e luta para sobreviver até o resgate.\nFicção científica com aventura, suspense e soluções criativas para desafios extremos.",
+    categories: ["Ficção Científica", "Aventura"],
+    releaseYear: 2015,
+    thumbnailUrl: "/posters/perdido_em_marte.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "O Senhor dos Anéis: O Retorno do Rei",
+    description: "A batalha final pelo destino da Terra Média e a conclusão da jornada do anel.\nFantasia épica, ação, drama e heroísmo em escala monumental.",
+    categories: ["Aventura", "Fantasia"],
+    releaseYear: 2003,
+    thumbnailUrl: "/posters/senhor_dos_aneis_retorno_do_rei.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+   {
+    _id: ObjectId(),
+    title: "Shrek",
+    description: "Um ogro e seu amigo burro embarcam em uma missão para resgatar uma princesa.\nComédia de aventura com humor irreverente e personagens memoráveis.",
+    categories: ["Comédia", "Fantasia"],
+    releaseYear: 2001,
+    thumbnailUrl: "/posters/shrek.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Shrek 2",
+    description: "Shrek e Fiona visitam os pais dela, enfrentando novos desafios e surpresas.\nContinuação divertida com aventura, comédia e romance.",
+    categories: ["Comédia", "Fantasia"],
+    releaseYear: 2004,
+    thumbnailUrl: "/posters/shrek_2.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Shrek Para Sempre",
+    description: "Shrek faz um pacto mágico que muda sua vida, aprendendo a valorizar sua família e amigos.\nComédia animada com aventura e lições de vida.",
+    categories: ["Comédia", "Fantasia"],
+    releaseYear: 2010,
+    thumbnailUrl: "/posters/shrek_para_sempre.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Sonic 3",
+    description: "Sonic e Tails enfrentam novos desafios para impedir o vilão Dr. Robotnik.\nAção e aventura com personagens carismáticos e muita velocidade.",
+    categories: ["Ação", "Aventura"],
+    releaseYear: 2024,
+    thumbnailUrl: "/posters/sonic_3.webp",
+    videoUrl: "",
+    isNewRelease: true
+  },
+  {
+    _id: ObjectId(),
+    title: "Superman",
+    description: "Clark Kent descobre seus poderes e se torna o herói que protege a humanidade.\nAção e aventura com superpoderes e heroísmo clássico.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 1978,
+    thumbnailUrl: "/posters/superman.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "The Batman",
+    description: "Bruce Wayne combate o crime em Gotham enquanto enfrenta novos vilões.\nAção, suspense e investigação com o icônico herói das sombras.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/the_batman.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Thor: Amor e Trovão",
+    description: "Thor enfrenta um novo vilão e busca encontrar seu lugar no universo.\nAção e fantasia com humor, aventura e batalhas épicas.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/thor_amor_e_trovao.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Titanic",
+    description: "O romance entre Jack e Rose a bordo do fatídico navio Titanic.\nDrama romântico épico com tragédia histórica e emoção intensa.",
+    categories: ["Drama", "Romance"],
+    releaseYear: 1997,
+    thumbnailUrl: "/posters/titanic.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Todo Mundo em Pânico",
+    description: "Paródias hilárias de filmes de terror clássicos com muito humor escrachado.\nComédia irreverente que satiriza o gênero e diverte com situações absurdas.",
+    categories: ["Comédia", "Terror"],
+    releaseYear: 2000,
+    thumbnailUrl: "/posters/todo_mundo_em_panico.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Top Gun: Maverick",
+    description: "O piloto Maverick retorna para treinar uma nova geração de aviadores.\nAção, aventura e drama com sequências aéreas emocionantes.",
+    categories: ["Ação", "Drama"],
+    releaseYear: 2022,
+    thumbnailUrl: "/posters/top_gun_maverick.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Um Homem Sem Passado",
+    description: "Um homem acorda sem memória e precisa reconstruir sua identidade e vida.\nDrama intenso com mistério e elementos de sobrevivência.",
+    categories: ["Drama", "Suspense"],
+    releaseYear: 2002,
+    thumbnailUrl: "/posters/um_homem_sem_passado.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Um Sonho de Liberdade",
+    description: "Dois homens criam um vínculo dentro da prisão, buscando esperança e liberdade.\nDrama profundo com amizade, injustiça e perseverança.",
+    categories: ["Drama", "Crime"],
+    releaseYear: 1994,
+    thumbnailUrl: "/posters/um_sonho_de_liberdade.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Última Missão",
+    description: "Um agente embarca em sua última missão cheia de ação e perigo.\nAção intensa com suspense e reviravoltas.",
+    categories: ["Ação", "Suspense"],
+    releaseYear: 2001,
+    thumbnailUrl: "/posters/utima_missao.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "V de Vingança",
+    description: "Em uma sociedade distópica, um vigilante luta contra o governo opressor.\nAção, drama e política em um thriller envolvente.",
+    categories: ["Ação", "Suspense"],
+    releaseYear: 2005,
+    thumbnailUrl: "/posters/v_de_vinganca.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Venom: A Última Dança",
+    description: "Eddie Brock precisa controlar o simbionte Venom enquanto enfrenta novos inimigos.\nAção e ficção com elementos de anti-herói e aventura urbana.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2021,
+    thumbnailUrl: "/posters/venom_a_ultima_danca.webp",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Vingadores: Guerra Infinita",
+    description: "Os heróis se unem para enfrentar o poderoso Thanos e proteger o universo.\nAção épica com super-heróis, drama e batalhas emocionantes.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2018,
+    thumbnailUrl: "/posters/vingadores_guerra_infinita.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "Vingadores: Ultimato",
+    description: "Os heróis restantes tentam desfazer as ações de Thanos e salvar o universo.\nAção e aventura épica com emoção e finais impactantes.",
+    categories: ["Ação", "Super-Heróis"],
+    releaseYear: 2019,
+    thumbnailUrl: "/posters/vingadores_ultimato.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  },
+  {
+    _id: ObjectId(),
+    title: "War of the Worlds",
+    description: "Humanidade enfrenta uma invasão alienígena devastadora.\nSuspense e ficção científica com ação intensa e sobrevivência.",
+    categories: ["Ficção Científica", "Suspense"],
+    releaseYear: 2005,
+    thumbnailUrl: "/posters/war_of_the_worlds.jpg",
+    videoUrl: "",
+    isNewRelease: false
+  }
+  
+]
