@@ -32,7 +32,7 @@ interface MovieSummary {
 
 export async function GET(req: NextRequest) {
   try {
-    // 1️⃣ Verifica token JWT
+
     const token = req.cookies.get("token")?.value;
     if (!token) {
       return NextResponse.json({ message: "Token não encontrado" }, { status: 401 });
@@ -50,24 +50,24 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Token inválido" }, { status: 401 });
     }
 
-    // 2️⃣ Conecta ao Mongo
+ 
     const db = await getDatabase();
     const moviesCol = db.collection<Movie>("Movies");
     const categoriesCol = db.collection<{ name: string }>("Categories");
 
-    // 3️⃣ Busca categorias e filmes
+
     const categoriesDocs = await categoriesCol.find().toArray();
     const categoryNames = categoriesDocs.map(cat => cat.name);
     const movies = await moviesCol.find().toArray();
 
-    // 4️⃣ Agrupa filmes por primeira categoria
+
     const grouped: Record<string, MovieSummary[]> = {};
 
     movies.forEach(movie => {
       const firstCat = movie.categories?.[0];
       const key = firstCat && categoryNames.includes(firstCat) ? firstCat : "Sem Categoria";
 
-      if (!grouped[key]) grouped[key] = []; // cria somente se houver filme
+      if (!grouped[key]) grouped[key] = []; 
       grouped[key].push({
         _id: movie._id.toString(),
         title: movie.title,

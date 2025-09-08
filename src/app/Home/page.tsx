@@ -22,6 +22,7 @@ interface MoviesByCategory {
 export default function HomePage() {
   const [moviesByCategory, setMoviesByCategory] = useState<MoviesByCategory>({});
   const [loading, setLoading] = useState(true);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null); 
 
   useEffect(() => {
     async function fetchMovies() {
@@ -60,7 +61,7 @@ export default function HomePage() {
         }}
       >
         <Header />
-        <Banner />
+        <Banner movie={selectedMovie}/>
 
         <div className="py-8 px-4 space-y-12">
           {Object.entries(moviesByCategory).map(([category, movies]) => (
@@ -71,7 +72,8 @@ export default function HomePage() {
                   <div
                     key={movie._id}
                     className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden"
-                  >
+                    onClick={() => setSelectedMovie(movie)}
+                 >
                     <img
                       src={movie.thumbnailUrl}
                       alt={movie.title}
