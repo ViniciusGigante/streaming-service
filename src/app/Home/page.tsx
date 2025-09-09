@@ -5,7 +5,19 @@ import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Banner from "./components/banner";
 
+import Image from "next/image";
+
 interface Movie {
+  _id: string;
+  title: string;
+  description: string;
+  releaseYear: number;
+  thumbnailUrl: string;
+  videoUrl: string;
+  isNewRelease: boolean;
+}
+
+interface Series {
   _id: string;
   title: string;
   description: string;
@@ -19,29 +31,51 @@ interface MoviesByCategory {
   [category: string]: Movie[];
 }
 
+interface SeriesByCategory {
+  Anime: Series[];
+  Desenho: Series[];
+  Outras: Series[];
+}
+
 export default function HomePage() {
   const [moviesByCategory, setMoviesByCategory] = useState<MoviesByCategory>({});
+  const [seriesByCategory, setSeriesByCategory] = useState<SeriesByCategory>({
+    Anime: [],
+    Desenho: [],
+    Outras: []
+  });
   const [loading, setLoading] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null); 
+  const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null); 
 
   useEffect(() => {
-    async function fetchMovies() {
+    async function fetchData() {
       try {
-        const res = await fetch("/api/filmes", { credentials: "include" });
-        const data = await res.json();
-        if (data.success) {
-          setMoviesByCategory(data.data);
+        
+        const resMovies = await fetch("/api/filmes", { credentials: "include" });
+        const dataMovies = await resMovies.json();
+        if (dataMovies.success) {
+          setMoviesByCategory(dataMovies.data);
         } else {
-          console.error("Erro ao buscar filmes:", data.message);
+          console.error("Erro ao buscar filmes:", dataMovies.message);
         }
+
+       
+        const resSeries = await fetch("/api/series", { credentials: "include" });
+        const dataSeries = await resSeries.json();
+        if (dataSeries.success) {
+          setSeriesByCategory(dataSeries.data);
+        } else {
+          console.error("Erro ao buscar séries:", dataSeries.message);
+        }
+
       } catch (err) {
-        console.error("Erro ao buscar filmes:", err);
+        console.error("Erro ao buscar dados:", err);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchMovies();
+    fetchData();
   }, []);
 
   if (loading) {
@@ -61,24 +95,27 @@ export default function HomePage() {
         }}
       >
         <Header />
-        <Banner movie={selectedMovie}/>
+        <Banner movie={selectedMovie} />
 
+        {/* Filmes */}
         <div className="py-8 px-4 space-y-12">
-          {Object.entries(moviesByCategory).map(([category, movies]) => (
+          {Object.entries(moviesByCategory).map(([category, movies]: [string, Movie[]]) => (
             <div key={category}>
               <h2 className="text-xl md:text-2xl font-bold mb-4">{category}</h2>
               <div className="flex overflow-x-auto gap-4 pb-2">
-                {movies.map((movie) => (
+                {movies.map((movie: Movie) => (
                   <div
                     key={movie._id}
                     className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden"
                     onClick={() => setSelectedMovie(movie)}
-                 >
-                    <img
-                      src={movie.thumbnailUrl}
-                      alt={movie.title}
-                      className="h-28 w-full object-cover"
-                    />
+                  >
+                    <Image
+  src={movie.thumbnailUrl} 
+  alt={movie.title}
+  className="h-28 w-full object-cover"
+  width={180}  
+  height={112} 
+/>
                     <div className="p-2">
                       <h3 className="text-sm font-semibold truncate">{movie.title}</h3>
                       <p className="text-xs text-gray-400">Ano: {movie.releaseYear}</p>
@@ -91,6 +128,38 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+
+          {/* Séries */}
+          {Object.entries(seriesByCategory).map(([category, seriesList]: [string, Series[]]) => (
+            <div key={category}>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">{category}</h2>
+              <div className="flex overflow-x-auto gap-4 pb-2">
+                {seriesList.map((series: Series) => (
+                  <div
+                    key={series._id}
+                    className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden"
+                    onClick={() => setSelectedMovie(series)}
+                  >
+                    <Image
+                      src={series.thumbnailUrl} 
+                      alt={series.title}
+                      className="h-28 w-full object-cover"
+                      width={180}  
+                      height={112} 
+                    />
+                    <div className="p-2">
+                      <h3 className="text-sm font-semibold truncate">{series.title}</h3>
+                      <p className="text-xs text-gray-400">Ano: {series.releaseYear}</p>
+                      {series.isNewRelease && (
+                        <p className="text-xs text-green-400 font-bold">Novo</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
         </div>
       </section>
     </main>
