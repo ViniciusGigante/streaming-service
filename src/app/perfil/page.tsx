@@ -1,4 +1,41 @@
+'use client'
+
+import { useEffect, useState } from "react";
+
 export default function Perfil() {
+  const [profile, setProfile] = useState<{
+    _id: string;
+    name: string;
+    avatarColor: string;
+    createdAt: string;
+  } | null>(null);
+
+  useEffect(() => {
+  async function fetchProfile() {
+    try {
+      const storedProfile = localStorage.getItem("activeProfile");
+      if (!storedProfile) {
+        console.error("Nenhum perfil ativo encontrado.");
+        return;
+      }
+
+      const profileObj = JSON.parse(storedProfile);
+      const profileId = profileObj._id; // só o ID
+
+      const res = await fetch(`/api/perfil/me?profileId=${profileId}`, { credentials: "include" });
+      const data = await res.json();
+
+      if (res.ok) setProfile(data);
+      else console.error(data.message);
+    } catch (err) {
+      console.error("Erro ao buscar perfil:", err);
+    }
+  }
+
+  fetchProfile();
+}, []);
+
+
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Banner de capa */}
@@ -7,17 +44,22 @@ export default function Perfil() {
       <div className="p-6 -mt-16">
         {/* Header Perfil */}
         <div className="flex items-center gap-6 mb-10">
-          <div className="w-32 h-32 rounded-full bg-gray-700 border-4 border-[#0f0f0f]"></div>
+          <div
+            className="w-32 h-32 rounded-full border-4 border-[#0f0f0f]"
+            style={{ backgroundColor: profile?.avatarColor || "#777" }}
+          ></div>
           <div className="flex-1">
-            <h1 className="text-3xl font-bold ">Nome do Usuário</h1>
-            <p className="text-gray-400">usuario@email.com</p>
+            <h1 className="text-3xl font-bold ">
+              {profile?.name || "Carregando..."}
+            </h1>
+            <p className="text-gray-400">{profile?._id || "usuario@email.com"}</p>
             <button className="mt-3 px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-700 text-sm">
               Editar Perfil
             </button>
           </div>
         </div>
 
-        {/* Estatísticas */}
+        {/* Estatísticas (mock) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           <div className="bg-gray-800 rounded-xl p-4 text-center">
             <p className="text-2xl font-bold">120</p>
@@ -32,14 +74,13 @@ export default function Perfil() {
             <p className="text-gray-400 text-sm">Favoritos</p>
           </div>
           <div className="bg-gray-800 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold">Ontem</p>
-            <p className="text-gray-400 text-sm">Último login</p>
+            <p className="text-2xl font-bold">{profile?.createdAt?.split("T")[0]}</p>
+            <p className="text-gray-400 text-sm">Perfil criado em</p>
           </div>
         </div>
 
-        {/* Listas */}
+        {/* Listas (mock) */}
         <div className="space-y-10">
-          {/* Assistir mais tarde */}
           <section>
             <h2 className="text-xl font-semibold mb-4">Assistir mais tarde</h2>
             <div className="flex gap-4 overflow-x-auto pb-2">
@@ -54,7 +95,6 @@ export default function Perfil() {
             </div>
           </section>
 
-          {/* Favoritos */}
           <section>
             <h2 className="text-xl font-semibold mb-4">Favoritos</h2>
             <div className="flex gap-4 overflow-x-auto pb-2">
@@ -69,7 +109,6 @@ export default function Perfil() {
             </div>
           </section>
 
-          {/* Atividade Recente */}
           <section>
             <h2 className="text-xl font-semibold mb-4">Atividade recente</h2>
             <div className="space-y-3">

@@ -63,7 +63,6 @@ export async function POST(req: NextRequest) {
       options
     );
 
-    // Cria cookie HTTP-only
     const response = NextResponse.json(
       { message: "Login successful" },
       { status: 200 }
