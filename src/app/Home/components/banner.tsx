@@ -21,19 +21,22 @@ export default function Banner({ movie }: BannerProps) {
 
   return (
     <div
-      style={{
-        minHeight: '400px',
-        marginTop: '50px',
-        padding: '20px',
-        borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        backgroundImage: `url(${movie.thumbnailUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
+       style={{
+    minHeight: '400px',
+    marginTop: '50px',
+    padding: '20px',
+    borderRadius: '8px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundImage: `url(${movie.thumbnailUrl})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'sticky',
+    top: '0',
+    zIndex: 50
+  }}
     >
       {/* Nome do filme */}
       <h1 className="text-5xl font-bold" style={{ margin: '10px' }}>

@@ -110,12 +110,12 @@ export default function HomePage() {
                     onClick={() => setSelectedMovie(movie)}
                   >
                     <Image
-  src={movie.thumbnailUrl} 
-  alt={movie.title}
-  className="h-28 w-full object-cover"
-  width={180}  
-  height={112} 
-/>
+                      src={movie.thumbnailUrl} 
+                      alt={movie.title}
+                      className="h-28 w-full object-cover"
+                      width={180}  
+                      height={112} 
+                    />
                     <div className="p-2">
                       <h3 className="text-sm font-semibold truncate">{movie.title}</h3>
                       <p className="text-xs text-gray-400">Ano: {movie.releaseYear}</p>
