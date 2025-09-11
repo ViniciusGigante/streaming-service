@@ -52,6 +52,7 @@ export async function GET(req: NextRequest) {
       name: profile.name,
       avatarColor: profile.avatarColor,
       createdAt: profile.createdAt,
+      email: payload.email,
     });
   } catch (error) {
     console.error("GET /api/perfil/me error:", error);

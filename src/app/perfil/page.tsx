@@ -8,6 +8,7 @@ export default function Perfil() {
     name: string;
     avatarColor: string;
     createdAt: string;
+    email: string;
   } | null>(null);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function Perfil() {
       }
 
       const profileObj = JSON.parse(storedProfile);
-      const profileId = profileObj._id; // só o ID
+      const profileId = profileObj._id;
 
       const res = await fetch(`/api/perfil/me?profileId=${profileId}`, { credentials: "include" });
       const data = await res.json();
@@ -52,7 +53,8 @@ export default function Perfil() {
             <h1 className="text-3xl font-bold ">
               {profile?.name || "Carregando..."}
             </h1>
-            <p className="text-gray-400">{profile?._id || "usuario@email.com"}</p>
+            <p className="text-gray-400">{profile?.email || "Carregando email..."}</p>
+
             <button className="mt-3 px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-700 text-sm">
               Editar Perfil
             </button>
