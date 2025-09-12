@@ -108,7 +108,7 @@ export default function HomePage() {
         <Banner movie={selectedMovie} />
 
         {/* Filmes */}
-        <div className="py-8 px-4 space-y-12">
+        <div className="py-8 px-4 space-y-12 mt-10">
           {Object.entries(moviesByCategory).map(([category, movies]: [string, Movie[]]) => (
             <div key={category}>  
    
