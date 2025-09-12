@@ -81,3 +81,30 @@
   duration: number,        // duração em minutos (opcional)
   thumbnailUrl: string     // capa do episódio
 }
+
+//
+// 8. watchLater (assistir mais tarde)
+//
+
+{
+  _id: ObjectId,  // ID único do item na lista
+  profileId: ObjectId("68ba00c29d7d398817d14a4f"),  // Referência ao perfil
+  contentId: ObjectId("68bdd17be6d1314e7df9fbdc"),  // Referência ao filme/série
+  contentType: "movie",  // Tipo: "movie" ou "series"
+  addedAt: ISODate("2024-03-25T10:30:00Z"),  // Data de adição
+  note: String,  // Opcional: nota do usuário
+  watched: false  // Status se já foi assistido
+}
+
+//
+// 9. favorites (filmes ou séries favoritas)
+//
+{
+  _id: ObjectId("68c1123456789abcdef12345"),
+  profileId: ObjectId("68ba00c29d7d398817d14a4f"),
+  contentId: ObjectId("68bdd17be6d1314e7df9fbdc"),
+  contentType: "movie",
+  addedAt: ISODate("2024-03-25T10:30:00Z"),
+  favoriteOrder: 1,
+  category: "action"
+}

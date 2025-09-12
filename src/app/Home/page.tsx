@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Banner from "./components/banner";
+import  { useRouter } from "next/navigation";
 
 import Image from "next/image";
 
@@ -46,6 +47,15 @@ export default function HomePage() {
   });
   const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null); 
+
+  const router = useRouter();
+
+  const handleExpandCategory = (category: string, type: 'movie' | 'series') => {
+    
+    const encodedCategory = encodeURIComponent(category);
+
+    router.push(`/Home/categoria/${encodedCategory}?type=${type}`);
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -100,8 +110,19 @@ export default function HomePage() {
         {/* Filmes */}
         <div className="py-8 px-4 space-y-12">
           {Object.entries(moviesByCategory).map(([category, movies]: [string, Movie[]]) => (
-            <div key={category}>
-              <h2 className="text-xl md:text-2xl font-bold mb-4">{category}</h2>
+            <div key={category}>  
+   
+
+
+ <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
+                <button
+                  onClick={() => handleExpandCategory(category, 'movie')}
+                  className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors"
+                >
+                  Expandir
+                </button>
+              </div>
               <div className="flex overflow-x-auto gap-4 pb-2">
                 {movies.map((movie: Movie) => (
                   <div
@@ -132,7 +153,16 @@ export default function HomePage() {
           {/* Séries */}
           {Object.entries(seriesByCategory).map(([category, seriesList]: [string, Series[]]) => (
             <div key={category}>
-              <h2 className="text-xl md:text-2xl font-bold mb-4">{category}</h2>
+              
+            <div className="flex items-center justify-between mb-4">
+  <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
+  <button
+    onClick={() => handleExpandCategory(category, 'series')}
+    className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors"
+  >
+    Expandir
+  </button>
+</div>
               <div className="flex overflow-x-auto gap-4 pb-2">
                 {seriesList.map((series: Series) => (
                   <div
