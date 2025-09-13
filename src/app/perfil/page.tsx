@@ -1,41 +1,110 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
+
+interface ProfileData {
+  _id: string;
+  name: string;
+  avatarColor: string;
+  createdAt: string;
+  email: string;
+}
+
+interface FavoriteItem {
+  _id: string;
+  title: string;
+  thumbnailUrl: string;
+  releaseYear: number;
+  isNewRelease: boolean;
+  tipo: string;
+  favoritoId: string;
+}
+
+interface WatchLaterItem {
+  _id: string;
+  title: string;
+  thumbnailUrl: string;
+  releaseYear: number;
+  isNewRelease: boolean;
+  description: string;
+  tipo: string;
+  watchLaterId: string;
+  addedAt: string;
+  note?: string;
+  watched: boolean;
+}
 
 export default function Perfil() {
-  const [profile, setProfile] = useState<{
-    _id: string;
-    name: string;
-    avatarColor: string;
-    createdAt: string;
-    email: string;
-  } | null>(null);
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [watchLater, setWatchLater] = useState<WatchLaterItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  async function fetchProfile() {
-    try {
-      const storedProfile = localStorage.getItem("activeProfile");
-      if (!storedProfile) {
-        console.error("Nenhum perfil ativo encontrado.");
-        return;
+    async function fetchProfileData() {
+      try {
+        const storedProfile = localStorage.getItem("activeProfile");
+        if (!storedProfile) {
+          console.error("Nenhum perfil ativo encontrado.");
+          setLoading(false);
+          return;
+        }
+
+        const profileObj = JSON.parse(storedProfile);
+        const profileId = profileObj._id;
+
+        // Buscar dados do perfil
+        const profileRes = await fetch(`/api/perfil/me?profileId=${profileId}`, { 
+          credentials: "include" 
+        });
+        
+        if (profileRes.ok) {
+          const profileData = await profileRes.json();
+          setProfile(profileData);
+        }
+
+        // Buscar favoritos
+        const favoritesRes = await fetch(`/api/perfil/favoritos?profileId=${profileId}`, {
+          credentials: "include"
+        });
+        
+        if (favoritesRes.ok) {
+          const favoritesData = await favoritesRes.json();
+          if (favoritesData.success) {
+            setFavorites(favoritesData.favoritos || []);
+          }
+        }
+
+        // Buscar watch later
+        const watchLaterRes = await fetch(`/api/perfil/watchLater?profileId=${profileId}`, {
+          credentials: "include"
+        });
+        
+        if (watchLaterRes.ok) {
+          const watchLaterData = await watchLaterRes.json();
+          if (watchLaterData.success) {
+            setWatchLater(watchLaterData.watchLater || []);
+          }
+        }
+
+      } catch (err) {
+        console.error("Erro ao buscar dados:", err);
+      } finally {
+        setLoading(false);
       }
-
-      const profileObj = JSON.parse(storedProfile);
-      const profileId = profileObj._id;
-
-      const res = await fetch(`/api/perfil/me?profileId=${profileId}`, { credentials: "include" });
-      const data = await res.json();
-
-      if (res.ok) setProfile(data);
-      else console.error(data.message);
-    } catch (err) {
-      console.error("Erro ao buscar perfil:", err);
     }
+
+    fetchProfileData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0f0f0f] text-white flex items-center justify-center">
+        <p>Carregando perfil...</p>
+      </div>
+    );
   }
-
-  fetchProfile();
-}, []);
-
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white">
@@ -61,7 +130,7 @@ export default function Perfil() {
           </div>
         </div>
 
-        {/* Estatísticas (mock) */}
+        {/* Estatísticas */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           <div className="bg-gray-800 rounded-xl p-4 text-center">
             <p className="text-2xl font-bold">120</p>
@@ -72,7 +141,7 @@ export default function Perfil() {
             <p className="text-gray-400 text-sm">Listas criadas</p>
           </div>
           <div className="bg-gray-800 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold">45</p>
+            <p className="text-2xl font-bold">{favorites.length}</p>
             <p className="text-gray-400 text-sm">Favoritos</p>
           </div>
           <div className="bg-gray-800 rounded-xl p-4 text-center">
@@ -81,36 +150,83 @@ export default function Perfil() {
           </div>
         </div>
 
-        {/* Listas (mock) */}
+        {/* Listas Reais */}
         <div className="space-y-10">
+          {/* Watch Later */}
           <section>
-            <h2 className="text-xl font-semibold mb-4">Assistir mais tarde</h2>
-            <div className="flex gap-4 overflow-x-auto pb-2">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div
-                  key={i}
-                  className="min-w-[150px] h-40 bg-gray-800 rounded-xl flex items-center justify-center text-gray-500"
-                >
-                  Filme {i}
-                </div>
-              ))}
-            </div>
+            <h2 className="text-xl font-semibold mb-4">Assistir mais tarde ({watchLater.length})</h2>
+            {watchLater.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                {watchLater.map((item) => (
+                  <div
+                    key={item.watchLaterId}
+                    className="bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
+                    onClick={() => {
+                      console.log('Item watch later clicado:', item.title);
+                    }}
+                  >
+                    <Image
+                      src={item.thumbnailUrl}
+                      alt={item.title}
+                      width={200}
+                      height={300}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-3">
+                      <h3 className="font-semibold text-sm truncate">{item.title}</h3>
+                      <p className="text-xs text-gray-400 mt-1">Ano: {item.releaseYear}</p>
+                      {item.isNewRelease && (
+                        <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
+                          Novo
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-400">Nenhum item para assistir mais tarde.</p>
+            )}
           </section>
 
+          {/* Favoritos */}
           <section>
-            <h2 className="text-xl font-semibold mb-4">Favoritos</h2>
-            <div className="flex gap-4 overflow-x-auto pb-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="min-w-[150px] h-40 bg-gray-800 rounded-xl flex items-center justify-center text-gray-500"
-                >
-                  Lorem Ipsum {i}
-                </div>
-              ))}
-            </div>
+            <h2 className="text-xl font-semibold mb-4">Favoritos ({favorites.length})</h2>
+            {favorites.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                {favorites.map((item) => (
+                  <div
+                    key={item.favoritoId}
+                    className="bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
+                    onClick={() => {
+                      console.log('Item favorito clicado:', item.title);
+                    }}
+                  >
+                    <Image
+                      src={item.thumbnailUrl}
+                      alt={item.title}
+                      width={200}
+                      height={300}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-3">
+                      <h3 className="font-semibold text-sm truncate">{item.title}</h3>
+                      <p className="text-xs text-gray-400 mt-1">Ano: {item.releaseYear}</p>
+                      {item.isNewRelease && (
+                        <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
+                          Novo
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-400">Nenhum item favoritado.</p>
+            )}
           </section>
 
+          {/* Atividade recente (mock) */}
           <section>
             <h2 className="text-xl font-semibold mb-4">Atividade recente</h2>
             <div className="space-y-3">
