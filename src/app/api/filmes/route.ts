@@ -28,6 +28,7 @@ interface MovieSummary {
   thumbnailUrl: string;
   videoUrl: string;
   isNewRelease: boolean;
+  isSeries: false
 }
 
 export async function GET(req: NextRequest) {
@@ -75,7 +76,8 @@ export async function GET(req: NextRequest) {
         releaseYear: movie.releaseYear,
         thumbnailUrl: movie.thumbnailUrl,
         videoUrl: movie.videoUrl,
-        isNewRelease: movie.isNewRelease
+        isNewRelease: movie.isNewRelease,
+        isSeries: false
       });
     });
 

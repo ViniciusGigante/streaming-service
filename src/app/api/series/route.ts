@@ -28,6 +28,7 @@ interface SeriesSummary {
   thumbnailUrl: string;
   videoUrl: string;
   isNewRelease: boolean;
+  isSeries: true
 }
 
 export async function GET(req: NextRequest) {
@@ -61,7 +62,8 @@ export async function GET(req: NextRequest) {
       releaseYear: series.releaseYear,
       thumbnailUrl: series.thumbnailUrl,
       videoUrl: series.videoUrl,
-      isNewRelease: series.isNewRelease
+      isNewRelease: series.isNewRelease,
+      isSeries: true
     });
 
     // Agrupa séries por categoria
