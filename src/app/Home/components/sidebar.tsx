@@ -16,6 +16,9 @@ export default function Sidebar() {
   const [scrolled, setScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
+  const activeProfile =  localStorage.getItem('activeProfile');
+  const profileId = activeProfile ? JSON.parse(activeProfile)._id : null;
+
   const router = useRouter();
 
   useEffect(() => {
@@ -59,7 +62,7 @@ export default function Sidebar() {
         <div className="fixed top-0 left-0 h-screen w-20 bg-gray-800 text-white flex flex-col items-center gap-8 p-4 border-r border-slate-900">
           <MagnifyingGlassIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Pesquisar')} />
           <HomeIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Home')} />
-          <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push("perfil")} />
+          <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push(`perfil/${profileId}`)} />
           <BellIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Notificações')} />
           <StarIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Favoritos')} />
           <ArrowRightOnRectangleIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Sair')} />
@@ -87,7 +90,7 @@ export default function Sidebar() {
             <span>Home</span>
           </div>
           <div className="flex items-center gap-4 text-lg">
-            <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push("perfil")} />
+            <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push(`perfil/${profileId}`)} />
             <span>Perfil</span>
           </div>
           <div className="flex items-center gap-4 text-lg">
