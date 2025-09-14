@@ -1,0 +1,75 @@
+// src/lib/mongodb.ts
+import { MongoClient, Db } from 'mongodb';
+
+const uri = process.env.MONGODB_URI!;
+const dbName = process.env.MONGODB_DB!;
+
+let cachedClient: MongoClient | null = null;
+let cachedDb: Db | null = null;
+
+export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db }> {
+  if (cachedClient && cachedDb) {
+    return { client: cachedClient, db: cachedDb };
+  }
+
+  const client = await MongoClient.connect(uri);
+  const db = client.db(dbName);
+
+  cachedClient = client;
+  cachedDb = db;
+
+  return { client, db };
+}
+
+export default connectToDatabase; 
+---
+import { NextRequest, NextResponse } from "next/server";
+import jwt, { JwtPayload } from "jsonwebtoken";
+
+interface SessionPayload extends JwtPayload{
+    userId: string;
+    email: string;
+}
+export async function validateToken(req: NextRequest) {
+    const token = req.cookies.get("token")?.value;
+
+    if (!token) {
+        return { error: "Token não encontrado", status: 401 };
+    }
+    
+    const secret = process.env.JWT_SECRET!;
+    try {
+        const payload = jwt.verify(token, secret) as SessionPayload;
+        return { payload };
+    } catch {
+        return { error: "Token inválido", status: 401 };
+    }
+}
+---
+// Aqui verifica se um perfil pertence mesmo a uma determinada conta
+import { ObjectId } from "mongodb";
+import connectToDatabase from "./connectDb";
+
+export async function validateProfile(
+  userId: string, 
+  profileId: string
+): Promise<boolean> {
+  try {
+    if (!ObjectId.isValid(userId) || !ObjectId.isValid(profileId)) {
+      return false;
+    }
+
+    const { db } = await connectToDatabase();
+    const profilesCollection = db.collection("Profiles");
+
+    const profile = await profilesCollection.findOne({
+      _id: new ObjectId(profileId),
+      accountId: new ObjectId(userId)
+    });
+
+    return !!profile;
+    
+  } catch {
+    return false;
+  }
+}

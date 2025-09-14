@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import EditarPerfilModal from "./components/updatePerfil";
 
 interface ProfileData {
   _id: string;
@@ -40,63 +41,67 @@ export default function Perfil() {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [watchLater, setWatchLater] = useState<WatchLaterItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  useEffect(() => {
-    async function fetchProfileData() {
-      try {
-        const storedProfile = localStorage.getItem("activeProfile");
-        if (!storedProfile) {
-          console.error("Nenhum perfil ativo encontrado.");
-          setLoading(false);
-          return;
-        }
+  // 1. Define a função fora do useEffect
+async function fetchProfileData() {
+  try {
+    const storedProfile = localStorage.getItem("activeProfile");
+    if (!storedProfile) {
+      console.error("Nenhum perfil ativo encontrado.");
+      setLoading(false);
+      return;
+    }
 
-        const profileObj = JSON.parse(storedProfile);
-        const profileId = profileObj._id;
+    const profileObj = JSON.parse(storedProfile);
+    const profileId = profileObj._id;
 
-        // Buscar dados do perfil
-        const profileRes = await fetch(`/api/perfil/me?profileId=${profileId}`, { 
-          credentials: "include" 
-        });
-        
-        if (profileRes.ok) {
-          const profileData = await profileRes.json();
-          setProfile(profileData);
-        }
+    // Buscar dados do perfil
+    const profileRes = await fetch(`/api/perfil/me?profileId=${profileId}`, { 
+      credentials: "include" 
+    });
+    
+    if (profileRes.ok) {
+      const profileData = await profileRes.json();
+      setProfile(profileData);
+    }
 
-        // Buscar favoritos
-        const favoritesRes = await fetch(`/api/perfil/favoritos?profileId=${profileId}`, {
-          credentials: "include"
-        });
-        
-        if (favoritesRes.ok) {
-          const favoritesData = await favoritesRes.json();
-          if (favoritesData.success) {
-            setFavorites(favoritesData.favoritos || []);
-          }
-        }
-
-        // Buscar watch later
-        const watchLaterRes = await fetch(`/api/perfil/watchLater?profileId=${profileId}`, {
-          credentials: "include"
-        });
-        
-        if (watchLaterRes.ok) {
-          const watchLaterData = await watchLaterRes.json();
-          if (watchLaterData.success) {
-            setWatchLater(watchLaterData.watchLater || []);
-          }
-        }
-
-      } catch (err) {
-        console.error("Erro ao buscar dados:", err);
-      } finally {
-        setLoading(false);
+    // Buscar favoritos
+    const favoritesRes = await fetch(`/api/perfil/favoritos?profileId=${profileId}`, {
+      credentials: "include"
+    });
+    
+    if (favoritesRes.ok) {
+      const favoritesData = await favoritesRes.json();
+      if (favoritesData.success) {
+        setFavorites(favoritesData.favoritos || []);
       }
     }
 
-    fetchProfileData();
-  }, []);
+    // Buscar watch later
+    const watchLaterRes = await fetch(`/api/perfil/watchLater?profileId=${profileId}`, {
+      credentials: "include"
+    });
+    
+    if (watchLaterRes.ok) {
+      const watchLaterData = await watchLaterRes.json();
+      if (watchLaterData.success) {
+        setWatchLater(watchLaterData.watchLater || []);
+      }
+    }
+
+  } catch (err) {
+    console.error("Erro ao buscar dados:", err);
+  } finally {
+    setLoading(false);
+  }
+}
+
+// 2. O useEffect apenas chama a função
+useEffect(() => {
+  fetchProfileData();
+}, []);
+
 
   if (loading) {
     return (
@@ -107,6 +112,7 @@ export default function Perfil() {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Banner de capa */}
       <div className="w-full h-48 bg-gradient-to-r from-gray-800 to-gray-700"></div>
@@ -124,9 +130,13 @@ export default function Perfil() {
             </h1>
             <p className="text-gray-400">{profile?.email || "Carregando email..."}</p>
 
-            <button className="mt-3 px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-700 text-sm">
-              Editar Perfil
-            </button>
+            <button
+  onClick={() => setIsEditModalOpen(true)}
+  className="mt-3 px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-700 text-sm"
+>
+  Editar Perfil
+</button>
+
           </div>
         </div>
 
@@ -243,6 +253,18 @@ export default function Perfil() {
           </section>
         </div>
       </div>
+      
     </div>
+    {profile && (
+  <EditarPerfilModal
+    isOpen={isEditModalOpen}
+    onClose={() => setIsEditModalOpen(false)}
+    onProfileUpdated={fetchProfileData}
+    profileId={profile._id}
+    currentName={profile.name}
+  />
+)}
+
+    </>
   );
 }
