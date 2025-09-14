@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useClickOutside } from "../../../../hooks/clickOutside"; // importe o hook que você criou
 
 interface EditarPerfilModalProps {
   isOpen: boolean;
@@ -20,6 +21,9 @@ export default function EditarPerfilModal({
   const [name, setName] = useState(currentName);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  useClickOutside(modalRef, () => onClose()); // FECHA quando clicar fora
 
   if (!isOpen) return null;
 
@@ -56,7 +60,10 @@ export default function EditarPerfilModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-gray-900 rounded-lg p-6 w-full max-w-sm relative animate-fadeIn">
+      <div
+        ref={modalRef} // <---- adiciona aqui
+        className="bg-gray-900 rounded-lg p-6 w-full max-w-sm relative animate-fadeIn"
+      >
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-400 hover:text-white"

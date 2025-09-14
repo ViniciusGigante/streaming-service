@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import EditarPerfilModal from "./components/updatePerfil";
+import Banner from './components/banner';
+
 
 interface ProfileData {
   _id: string;
@@ -10,6 +12,16 @@ interface ProfileData {
   avatarColor: string;
   createdAt: string;
   email: string;
+}
+interface Movie {
+  _id: string;
+  title: string;
+  description: string;
+  releaseYear: number;
+  thumbnailUrl: string;
+  videoUrl?: string; // opcional
+  isNewRelease: boolean;
+  isSeries?: boolean;
 }
 
 interface FavoriteItem {
@@ -42,6 +54,8 @@ export default function Perfil() {
   const [watchLater, setWatchLater] = useState<WatchLaterItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+
 
   // 1. Define a função fora do useEffect
 async function fetchProfileData() {
@@ -113,6 +127,10 @@ useEffect(() => {
 
   return (
     <>
+    {console.log("SelectedMovie atual:", selectedMovie)}
+    {selectedMovie && (
+  <Banner movie={selectedMovie} />
+)}
     <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Banner de capa */}
       <div className="w-full h-48 bg-gradient-to-r from-gray-800 to-gray-700"></div>
@@ -168,31 +186,43 @@ useEffect(() => {
             {watchLater.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 {watchLater.map((item) => (
-                  <div
-                    key={item.watchLaterId}
-                    className="bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
-                    onClick={() => {
-                      console.log('Item watch later clicado:', item.title);
-                    }}
-                  >
-                    <Image
-                      src={item.thumbnailUrl}
-                      alt={item.title}
-                      width={200}
-                      height={300}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-3">
-                      <h3 className="font-semibold text-sm truncate">{item.title}</h3>
-                      <p className="text-xs text-gray-400 mt-1">Ano: {item.releaseYear}</p>
-                      {item.isNewRelease && (
-                        <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
-                          Novo
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
+  <div
+    key={item.watchLaterId}
+    className="bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
+    onClick={() => {
+  console.log("Filme clicado:", item.title); // <-- verifica se está clicando
+  setSelectedMovie({
+    _id: item._id,
+    title: item.title,
+    description: item.description || "",
+    releaseYear: item.releaseYear,
+    thumbnailUrl: item.thumbnailUrl,
+    videoUrl: "", // ou link real se tiver
+    isNewRelease: item.isNewRelease,
+    isSeries: item.tipo === "series"
+  });
+}}
+
+  >
+    <Image
+      src={item.thumbnailUrl}
+      alt={item.title}
+      width={200}
+      height={300}
+      className="w-full h-48 object-cover"
+    />
+    <div className="p-3">
+      <h3 className="font-semibold text-sm truncate">{item.title}</h3>
+      <p className="text-xs text-gray-400 mt-1">Ano: {item.releaseYear}</p>
+      {item.isNewRelease && (
+        <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
+          Novo
+        </span>
+      )}
+    </div>
+  </div>
+))}
+
               </div>
             ) : (
               <p className="text-gray-400">Nenhum item para assistir mais tarde.</p>
@@ -209,8 +239,19 @@ useEffect(() => {
                     key={item.favoritoId}
                     className="bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
                     onClick={() => {
-                      console.log('Item favorito clicado:', item.title);
-                    }}
+  console.log("Filme favorito clicado:", item.title);
+  setSelectedMovie({
+    _id: item._id,
+    title: item.title,
+    description: "", 
+    releaseYear: item.releaseYear,
+    thumbnailUrl: item.thumbnailUrl,
+    videoUrl: "",
+    isNewRelease: item.isNewRelease,
+    isSeries: item.tipo === "series"
+  });
+}}
+
                   >
                     <Image
                       src={item.thumbnailUrl}
@@ -255,6 +296,8 @@ useEffect(() => {
       </div>
       
     </div>
+    
+
     {profile && (
   <EditarPerfilModal
     isOpen={isEditModalOpen}
