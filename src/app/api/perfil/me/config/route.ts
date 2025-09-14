@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import getDatabase from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 import { validateToken } from "@/middlewares/token";
+import connectToDatabase from "@/middlewares/connectDb";
+import { validateProfile } from "@/middlewares/validateProfile";
 
-export default async function PUT(req: NextRequest) {
+export async function PUT(req: NextRequest) {
     try {
-
+        // 1. Validar token
         const tokenValidation = await validateToken(req);
         
         if (tokenValidation.error) {
@@ -15,8 +16,17 @@ export default async function PUT(req: NextRequest) {
             );
         }
 
+        // 2. Verificar se payload existe
+        if (!tokenValidation.payload) {
+            return NextResponse.json(
+                { message: "Token inválido" },
+                { status: 401 }
+            );
+        }
+
         const { payload } = tokenValidation;
     
+        // 3. Obter profileId
         const url = new URL(req.url);
         const profileId = url.searchParams.get("profileId");
 
@@ -26,20 +36,57 @@ export default async function PUT(req: NextRequest) {
                 { status: 400 }
             );
         }
-        if (!ObjectId.isValid(profileId)) {
+
+        // 4. Validar se o perfil pertence ao usuário
+        const isValidProfile = await validateProfile(payload.userId, profileId);
+        
+        if (!isValidProfile) {
             return NextResponse.json(
-                { message: "profileId inválido" },
+                { message: "Perfil não pertence a esta conta" },
+                { status: 403 }
+            );
+        }
+
+        // 5. Obter dados do body - APENAS name
+        const body = await req.json();
+        const { name } = body;
+
+        if (!name || typeof name !== 'string') {
+            return NextResponse.json(
+                { message: "Nome inválido ou não fornecido" },
                 { status: 400 }
             );
         }
 
-        const body = await req.json();
-        const { name, } = body;
+        // 6. Usar middleware de conexão
+        const { db } = await connectToDatabase();
 
+        // 7. Atualizar APENAS o nome do perfil
+        const profilesCollection = db.collection("Profiles");
+        const result = await profilesCollection.updateOne(
+            { 
+                _id: new ObjectId(profileId),
+                accountId: new ObjectId(payload.userId)
+            },
+            { 
+                $set: { 
+                    name: name,
+                    updatedAt: new Date()
+                } 
+            }
+        );
 
-        // CONSULTA
-        const db = await getDatabase();
+        if (result.matchedCount === 0) {
+            return NextResponse.json(
+                { message: "Perfil não encontrado" },
+                { status: 404 }
+            );
+        }
 
+        return NextResponse.json(
+            { message: "Perfil atualizado com sucesso" },
+            { status: 200 }
+        );
 
     } catch (error) {
         console.error("Erro interno:", error);
