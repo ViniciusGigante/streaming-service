@@ -1,0 +1,215 @@
+SÉRIE: Black Clover
+ID: 68bdd1bfe6d1314e7df9fc29
+
+TEMPORADAS:
+
+Temporada 1: 51 episódios
+
+Temporada 2: 52 episódios
+
+Temporada 3: 36 episódios
+
+Temporada 4: 34 episódios
+
+TOTAL: 4 temporadas | 173 episódios
+
+SÉRIE: Boku no Hero Academia (My Hero Academia)
+ID: 68bdd1bfe6d1314e7df9fc2a
+
+TEMPORADAS:
+
+Temporada 1: 13 episódios
+
+Temporada 2: 25 episódios
+
+Temporada 3: 25 episódios
+
+Temporada 4: 25 episódios
+
+Temporada 5: 25 episódios
+
+Temporada 6: 25 episódios
+
+TOTAL: 6 temporadas | 138 episódios
+
+SÉRIE: Breaking Bad
+ID: 68bdd1bfe6d1314e7df9fc2b
+
+TEMPORADAS:
+
+Temporada 1: 7 episódios
+
+Temporada 2: 13 episódios
+
+Temporada 3: 13 episódios
+
+Temporada 4: 13 episódios
+
+Temporada 5: 16 episódios
+
+TOTAL: 5 temporadas | 62 episódios
+
+SÉRIE: Dr. House
+ID: 68bdd1bfe6d1314e7df9fc2c
+
+TEMPORADAS:
+
+Temporada 1: 22 episódios
+
+Temporada 2: 24 episódios
+
+Temporada 3: 24 episódios
+
+Temporada 4: 16 episódios
+
+Temporada 5: 24 episódios
+
+Temporada 6: 22 episódios
+
+Temporada 7: 23 episódios
+
+Temporada 8: 22 episódios
+
+TOTAL: 8 temporadas | 177 episódios
+
+SÉRIE: Dragon Ball Z
+ID: 68bdd1bfe6d1314e7df9fc2d
+
+TEMPORADAS:
+
+Saga Sayajins: 35 episódios
+
+Saga Freeza: 74 episódios
+
+Saga Cell: 86 episódios
+
+Saga Majin Boo: 96 episódios
+
+TOTAL: 4 sagas | 291 episódios
+
+SÉRIE: Hunter x Hunter
+ID: 68bdd1bfe6d1314e7df9fc2e
+
+TEMPORADAS:
+
+Temporada 1: 62 episódios
+
+Temporada 2: 76 episódios
+
+Temporada 3: 58 episódios
+
+Temporada 4: 62 episódios
+
+TOTAL: 4 temporadas | 258 episódios
+
+SÉRIE: JoJo's Bizarre Adventure
+ID: 68bdd1bfe6d1314e7df9fc2f
+
+TEMPORADAS:
+
+Part 1: Phantom Blood: 9 episódios
+
+Part 2: Battle Tendency: 17 episódios
+
+Part 3: Stardust Crusaders: 48 episódios
+
+Part 4: Diamond is Unbreakable: 39 episódios
+
+Part 5: Golden Wind: 39 episódios
+
+Part 6: Stone Ocean: 38 episódios
+
+TOTAL: 6 partes | 190 episódios
+
+SÉRIE: Naruto Shippuden
+ID: 68bdd1bfe6d1314e7df9fc31
+
+TEMPORADAS:
+
+Temporada 1: 32 episódios
+
+Temporada 2: 35 episódios
+
+Temporada 3: 30 episódios
+
+Temporada 4: 42 episódios
+
+Temporada 5: 38 episódios
+
+Temporada 6: 41 episódios
+
+Temporada 7: 52 episódios
+
+Temporada 8: 47 episódios
+
+TOTAL: 8 temporadas | 317 episódios
+
+SÉRIE: One Punch Man
+ID: 68bdd1bfe6d1314e7df9fc32
+
+TEMPORADAS:
+
+Temporada 1: 12 episódios
+
+Temporada 2: 12 episódios
+
+Temporada 3: 12 episódios (em produção)
+
+TOTAL: 2 temporadas + 1 em produção | 24 episódios
+
+SÉRIE: Prison Break
+ID: 68bdd1bfe6d1314e7df9fc33
+
+TEMPORADAS:
+
+Temporada 1: 22 episódios
+
+Temporada 2: 22 episódios
+
+Temporada 3: 13 episódios
+
+Temporada 4: 24 episódios
+
+Temporada 5: 9 episódios
+
+TOTAL: 5 temporadas | 90 episódios
+
+SÉRIE: Round 6 (Squid Game)
+ID: 68bdd1bfe6d1314e7df9fc34
+
+TEMPORADAS:
+
+Temporada 1: 9 episódios
+
+Temporada 2: 8 episódios (em produção)
+
+TOTAL: 1 temporada + 1 em produção | 9 episódios
+
+SÉRIE: Shingeki no Kyojin (Attack on Titan)
+ID: 68bdd1bfe6d1314e7df9fc35
+
+TEMPORADAS:
+
+Temporada 1: 25 episódios
+
+Temporada 2: 12 episódios
+
+Temporada 3: 22 episódios
+
+Temporada 4: 28 episódios
+
+Temporada 5: 12 episódios
+
+TOTAL: 5 temporadas | 99 episódios
+
+SÉRIE: Wandinha (Wednesday)
+ID: 68bdd1bfe6d1314e7df9fc36
+
+TEMPORADAS:
+
+Temporada 1: 8 episódios
+
+Temporada 2: 8 episódios (em produção)
+
+TOTAL: 1 temporada + 1 em produção | 8 episódios
+
