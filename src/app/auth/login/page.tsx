@@ -136,7 +136,7 @@ export default function LoginPage() {
             onClick={() => router.push("/")}
           >
             <ArrowRightOnRectangleIcon className="w-4 h-4" />
-            Voltar para Login
+            Voltar ao Início
           </button>
         </div>
       </div>
