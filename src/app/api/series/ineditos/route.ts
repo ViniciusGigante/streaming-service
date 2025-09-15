@@ -1,4 +1,4 @@
-// src/app/api/series/ineditos/route.ts
+
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/middlewares/connectDb"; // caminho relativo sem alias
 

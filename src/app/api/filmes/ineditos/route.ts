@@ -1,4 +1,3 @@
-// src/app/api/movies/ineditos/route.ts
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/middlewares/connectDb"; // ajuste sem alias
 
