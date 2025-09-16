@@ -57,6 +57,10 @@ export default function HomePage() {
     router.push(`/Home/categoria/${encodedCategory}?type=${type}`);
   }
 
+  const handleCloseBanner = () => {
+    setSelectedMovie(null);
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -105,7 +109,7 @@ export default function HomePage() {
         }}
       >
         <Header />
-        <Banner movie={selectedMovie} />
+        <Banner movie={selectedMovie} onClose={handleCloseBanner}/>
 
         {/* Filmes */}
         <div className="py-8 px-4 space-y-12 mt-10">
