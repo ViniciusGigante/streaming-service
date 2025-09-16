@@ -1,3 +1,5 @@
+'use client'
+
 import { PlayIcon, ClockIcon, StarIcon, ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Image from "next/image";
@@ -8,10 +10,11 @@ export interface Movie {
   description: string;
   releaseYear: number;
   thumbnailUrl: string;
-  videoUrl: string;
+  videoUrl?: string;
   isNewRelease: boolean;
   isSeries?: boolean;
 }
+
 export interface BannerProps {
   movie: Movie | null;
   onClose: () => void;

@@ -1,8 +1,8 @@
-import { PlayIcon, ClockIcon, StarIcon, ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import { PlayIcon, ClockIcon, StarIcon, ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Image from "next/image";
 
-interface Movie {
+export interface Movie {
   _id: string;
   title: string;
   description: string;
@@ -13,11 +13,12 @@ interface Movie {
   isSeries?: boolean;
 }
 
-interface BannerProps {
+export interface BannerProps {
   movie: Movie | null;
+  onClose: () => void;
 }
 
-export default function Banner({ movie }: BannerProps) {
+export default function Banner({ movie, onClose }: BannerProps) {
   const [loadingFavorites, setLoadingFavorites] = useState(false);
   const [loadingWatchLater, setLoadingWatchLater] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -131,6 +132,13 @@ export default function Banner({ movie }: BannerProps) {
           <button className="flex items-center justify-center w-12 h-12 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition">
             <ArrowDownTrayIcon className="w-6 h-6" />
           </button>
+          {/* Botão de fechar */}
+      <button
+        onClick={onClose}
+        className="flex items-center justify-center h-12 p-2 rounded-2xl bg-gray-700 text-white  hover:bg-gray-600 transition"
+      >
+        Fechar
+      </button>
         </div>
 
         {/* Mensagem de feedback */}

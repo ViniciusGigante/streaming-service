@@ -19,7 +19,7 @@ interface Movie {
   description: string;
   releaseYear: number;
   thumbnailUrl: string;
-  videoUrl?: string; // opcional
+  videoUrl?: string; 
   isNewRelease: boolean;
   isSeries?: boolean;
 }
@@ -57,7 +57,6 @@ export default function Perfil() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
 
-  // 1. Define a função fora do useEffect
 async function fetchProfileData() {
   try {
     const storedProfile = localStorage.getItem("activeProfile");
@@ -70,7 +69,7 @@ async function fetchProfileData() {
     const profileObj = JSON.parse(storedProfile);
     const profileId = profileObj._id;
 
-    // Buscar dados do perfil
+  
     const profileRes = await fetch(`/api/perfil/me?profileId=${profileId}`, { 
       credentials: "include" 
     });
@@ -80,7 +79,7 @@ async function fetchProfileData() {
       setProfile(profileData);
     }
 
-    // Buscar favoritos
+
     const favoritesRes = await fetch(`/api/perfil/favoritos?profileId=${profileId}`, {
       credentials: "include"
     });
@@ -92,7 +91,7 @@ async function fetchProfileData() {
       }
     }
 
-    // Buscar watch later
+
     const watchLaterRes = await fetch(`/api/perfil/watchLater?profileId=${profileId}`, {
       credentials: "include"
     });
@@ -111,7 +110,6 @@ async function fetchProfileData() {
   }
 }
 
-// 2. O useEffect apenas chama a função
 useEffect(() => {
   fetchProfileData();
 }, []);
@@ -128,8 +126,11 @@ useEffect(() => {
   return (
     <>
     {console.log("SelectedMovie atual:", selectedMovie)}
-    {selectedMovie && (
-  <Banner movie={selectedMovie} />
+{selectedMovie && (
+  <Banner
+    movie={selectedMovie}
+    onClose={() => setSelectedMovie(null)} 
+  />
 )}
     <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Banner de capa */}
@@ -197,7 +198,7 @@ useEffect(() => {
     description: item.description || "",
     releaseYear: item.releaseYear,
     thumbnailUrl: item.thumbnailUrl,
-    videoUrl: "", // ou link real se tiver
+    videoUrl: "",
     isNewRelease: item.isNewRelease,
     isSeries: item.tipo === "series"
   });

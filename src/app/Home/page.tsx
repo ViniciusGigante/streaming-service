@@ -3,20 +3,11 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
-import Banner from "./components/banner";
+import Banner,{Movie} from "./components/banner";
 import  { useRouter } from "next/navigation";
 
 import Image from "next/image";
 
-interface Movie {
-  _id: string;
-  title: string;
-  description: string;
-  releaseYear: number;
-  thumbnailUrl: string;
-  videoUrl: string;
-  isNewRelease: boolean;
-}
 
 interface Series {
   _id: string;
@@ -109,7 +100,10 @@ export default function HomePage() {
         }}
       >
         <Header />
-        <Banner movie={selectedMovie} onClose={handleCloseBanner}/>
+        <Banner 
+          movie={selectedMovie}
+          onClose={() => handleCloseBanner()} 
+        />
 
         {/* Filmes */}
         <div className="py-8 px-4 space-y-12 mt-10">
