@@ -66,6 +66,7 @@ export default function LoginPage() {
                 id="email"
                 name="email"
                 type="email"
+                autoComplete="username"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -82,6 +83,7 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
+                autoComplete="current-password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -93,23 +95,14 @@ export default function LoginPage() {
 
           {message && <p className="text-center text-sm text-red-500 mt-2">{message}</p>}
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-600 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
-                Lembrar-me
-              </label>
-            </div>
+          <button
+  type="button"
+  className="text-sm text-blue-600 hover:text-blue-400 cursor-pointer transition-colors font-medium"
+>
+  Esqueceu a senha?
+</button>
 
-            <button type="button" className="text-sm text-blue-600 hover:blue-900">
-              Esqueceu a senha?
-            </button>
-          </div>
+
 
           <button
             type="submit"

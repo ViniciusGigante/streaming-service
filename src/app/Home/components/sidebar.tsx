@@ -60,7 +60,6 @@ export default function Sidebar() {
 
       {isDesktop && (
         <div className="fixed top-0 left-0 h-screen w-20 bg-gray-800 text-white flex flex-col items-center gap-8 p-4 border-r border-slate-900">
-          <MagnifyingGlassIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Pesquisar')} />
           <HomeIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Home')} />
           <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push(`perfil/${profileId}`)} />
           <BellIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Notificações')} />

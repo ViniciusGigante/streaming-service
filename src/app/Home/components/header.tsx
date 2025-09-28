@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SearchBar from "./searchBar";
 
 export default function Header() {
   return (
@@ -9,10 +10,7 @@ export default function Header() {
     height={100}
     alt="Cineverse Logo"
   />
-  <div
-    className="w-3/4 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mt-auto rounded-full"
-    style={{ height: '1px' }}
-  ></div>
+  <SearchBar/>
 </header>
 
   );

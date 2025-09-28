@@ -1,4 +1,4 @@
-import { PlayIcon, ClockIcon, StarIcon, ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PlayIcon, ClockIcon, StarIcon, ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Image from "next/image";
 

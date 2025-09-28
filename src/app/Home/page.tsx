@@ -38,6 +38,7 @@ export default function HomePage() {
   });
   const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null); 
+  const [isSearching,setIsSearching] = useState(false)
 
   const router = useRouter();
 
@@ -128,20 +129,23 @@ export default function HomePage() {
                     className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden"
                     onClick={() => setSelectedMovie(movie)}
                   >
-                    <Image
-                      src={movie.thumbnailUrl} 
-                      alt={movie.title}
-                      className="h-28 w-full object-cover"
-                      width={180}  
-                      height={112} 
-                    />
-                    <div className="p-2">
-                      <h3 className="text-sm font-semibold truncate">{movie.title}</h3>
-                      <p className="text-xs text-gray-400">Ano: {movie.releaseYear}</p>
-                      {movie.isNewRelease && (
-                        <p className="text-xs text-green-400 font-bold">Novo</p>
-                      )}
-                    </div>
+                   <Image
+  src={movie.thumbnailUrl} 
+  alt={movie.title}
+  className="w-full h-48 object-cover"
+  width={200}
+  height={300}
+/>
+
+                    <div className="p-3">
+  <h3 className="font-semibold text-sm truncate">{movie.title}</h3>
+  <p className="text-xs text-gray-400 mt-1">Ano: {movie.releaseYear}</p>
+  {movie.isNewRelease && (
+    <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
+      Novo
+    </span>
+  )}
+</div>
                   </div>
                 ))}
               </div>
@@ -163,25 +167,30 @@ export default function HomePage() {
 </div>
               <div className="flex overflow-x-auto gap-4 pb-2">
                 {seriesList.map((series: Series) => (
-                  <div
-                    key={series._id}
-                    className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden"
-                    onClick={() => setSelectedMovie(series)}
-                  >
+                 <div
+  key={series._id}
+  className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
+  onClick={() => setSelectedMovie(series)}
+>
+
                     <Image
-                      src={series.thumbnailUrl} 
-                      alt={series.title}
-                      className="h-28 w-full object-cover"
-                      width={180}  
-                      height={112} 
-                    />
-                    <div className="p-2">
-                      <h3 className="text-sm font-semibold truncate">{series.title}</h3>
-                      <p className="text-xs text-gray-400">Ano: {series.releaseYear}</p>
-                      {series.isNewRelease && (
-                        <p className="text-xs text-green-400 font-bold">Novo</p>
-                      )}
-                    </div>
+  src={series.thumbnailUrl} 
+  alt={series.title}
+  className="w-full h-48 object-cover"
+  width={200}
+  height={300}
+/>
+
+                    <div className="p-3">
+  <h3 className="font-semibold text-sm truncate">{series.title}</h3>
+  <p className="text-xs text-gray-400 mt-1">Ano: {series.releaseYear}</p>
+  {series.isNewRelease && (
+    <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
+      Novo
+    </span>
+  )}
+</div>
+
                   </div>
                 ))}
               </div>
