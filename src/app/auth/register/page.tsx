@@ -184,7 +184,9 @@ export default function RegisterPage() {
           )}
 
           <div className="text-center">
-            <button type="button" className="text-sm text-gray-400 hover:text-gray-300">
+            <button type="button" className="text-sm text-gray-400 hover:text-gray-300 cursor-pointer"
+              onClick={() => router.push('/auth/login')}
+            >
               Já tem uma conta? Entrar
             </button>
           </div>

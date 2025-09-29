@@ -95,12 +95,7 @@ export default function LoginPage() {
 
           {message && <p className="text-center text-sm text-red-500 mt-2">{message}</p>}
 
-          <button
-  type="button"
-  className="text-sm text-blue-600 hover:text-blue-400 cursor-pointer transition-colors font-medium"
->
-  Esqueceu a senha?
-</button>
+        
 
 
 
