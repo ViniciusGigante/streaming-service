@@ -1,6 +1,10 @@
+'use client'
+
 import Link from "next/link";
+import { useRouter } from "next/navigation"; 
 
 export default function TermsPage() {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <div className="max-w-4xl mx-auto px-6 py-12">
@@ -59,8 +63,14 @@ export default function TermsPage() {
             </p>
           </section>
         </div>
-<button className="mt-8 w-full cursor-pointer
- bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+<button
+  onClick={() => {
+    localStorage.setItem("termsAccepted", "true");
+    router.push("/auth/register");
+  }}
+  className="mt-8 w-full cursor-pointer
+  bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+>
   Accept
 </button>
         <footer className="mt-12 border-t pt-6 text-sm text-gray-600 text-center">

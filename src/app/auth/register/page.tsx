@@ -1,9 +1,16 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function RegisterPage() {
+
+useEffect(() => {
+  const accepted = localStorage.getItem("termsAccepted") === "true";
+  if (accepted && !form.termsAccepted) {
+    setForm(prev => ({ ...prev, termsAccepted: true }));
+  }
+}, []);
 
   const router = useRouter();
 
@@ -157,20 +164,23 @@ export default function RegisterPage() {
           </div>
 
           <div className="flex items-center">
-            <input
-              id="terms"
-              name="termsAccepted"
-              type="checkbox"
-              checked={form.termsAccepted}
-              onChange={handleChange}
-              required
-              className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-600 rounded"
-            />
-            <label htmlFor="terms" className="ml-2 block text-sm text-gray-300">
-              Concordo com os termos e condições
-            </label>
-          </div>
-
+  <button
+    type="button"
+    onClick={() => {
+      if (!form.termsAccepted) {
+        // leva para a página de termos
+        router.push("/auth/terms");
+      } else {
+        // se já aceitou, clicar remove o estado (opcional)
+        setForm(prev => ({ ...prev, termsAccepted: false }));
+      }
+    }}
+    className={`px-4 py-2 rounded-md text-white transition
+      ${form.termsAccepted ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700"}`}
+  >
+    {form.termsAccepted ? "Aceito" : "Ler os termos de serviço"}
+  </button>
+</div>
           <button
             type="submit"
             disabled={loading}
