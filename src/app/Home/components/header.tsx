@@ -1,5 +1,4 @@
 import Image from "next/image";
-import SearchBar from "./searchBar";
 
 export default function Header() {
   return (
@@ -10,7 +9,6 @@ export default function Header() {
     height={100}
     alt="Cineverse Logo"
   />
-  <SearchBar/>
 </header>
 
   );

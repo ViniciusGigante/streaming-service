@@ -60,7 +60,7 @@ export default function Sidebar() {
 
       {isDesktop && (
         <div className="fixed top-0 left-0 h-screen w-20 bg-gray-800 text-white flex flex-col items-center gap-8 p-4 border-r border-slate-900">
-          <HomeIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Home')} />
+          <HomeIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push('/')} />
           <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push(`perfil/${profileId}`)} />
           <BellIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Notificações')} />
           <StarIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Favoritos')} />
@@ -79,14 +79,9 @@ export default function Sidebar() {
           <button className="self-end text-2xl mb-4" onClick={() => setMenuOpen(false)}>
             ✕
           </button>
-
           <div className="flex items-center gap-4 text-lg">
-            <MagnifyingGlassIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Pesquisar')} />
-            <span>Pesquisar</span>
-          </div>
-          <div className="flex items-center gap-4 text-lg">
-            <HomeIcon className="w-6 h-6 cursor-pointer" onClick={() => console.log('Home')} />
-            <span>Home</span>
+            <HomeIcon className="w-6 h-6 cursor-pointer"  onClick={() => router.push('/')}/>
+            <span>Inicio</span>
           </div>
           <div className="flex items-center gap-4 text-lg">
             <UserIcon className="w-6 h-6 cursor-pointer" onClick={() => router.push(`perfil/${profileId}`)} />
