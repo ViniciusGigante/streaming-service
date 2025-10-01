@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 
@@ -10,6 +10,22 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  console.log("useEffect rodou, token:", token); 
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      console.log("Payload do token:", payload);
+      setEmail(payload.email || "");
+    } catch (err) {
+      console.error("Token inválido:", err);
+      setEmail("");
+    }
+  }
+}, []);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -5,7 +5,6 @@ import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Banner,{Movie} from "./components/banner";
 import  { useRouter } from "next/navigation";
-
 import Image from "next/image";
 
 
@@ -110,8 +109,6 @@ export default function HomePage() {
         <div className="py-8 px-4 space-y-12 mt-10">
           {Object.entries(moviesByCategory).map(([category, movies]: [string, Movie[]]) => (
             <div key={category}>  
-   
-
 
  <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
