@@ -3,7 +3,8 @@ import SearchBar from "./searchBar";
 
 export default function Header() {
   return (
-    <header className=" md:flex w-full min-h-[10vh] bg-transparent text-white flex-row px-4 absolute top-0 left-0 z-20 items-center justify-start gap-6">
+    <header className="hidden md:flex fixed top-0 left-20 w-full min-h-[10vh]  text-white flex-row px-4 z-20 items-center justify-start gap-6">
+
       <Image
         src="/cineverse-logo.svg"
         width={300}
