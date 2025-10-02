@@ -86,10 +86,21 @@ export default function LandingPage() {
 
   {/* Call-to-action principal */}
   <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-8 z-10">
-    <button className="bg-[#3B0764] hover:bg-[#4B0C8C] px-6 md:px-8 py-2 md:py-3 rounded-lg font-bold text-lg md:text-xl transition shadow-lg">
+    <button className="bg-[#3B0764] hover:bg-[#4B0C8C]
+     px-6 md:px-8 py-2 md:py-3 rounded-lg
+      font-bold text-lg md:text-xl transition shadow-lg
+      cursor-pointer
+      "
+      onClick={() => router.push('/auth/register')}
+      >
       Comece Agora
     </button>
-    <button className="bg-[#0F172A] hover:bg-[#1E293B] px-6 md:px-8 py-2 md:py-3 rounded-lg font-bold text-lg md:text-xl transition shadow-lg">
+    <button className="bg-[#0F172A] hover:bg-[#1E293B] 
+    px-6 md:px-8 py-2 md:py-3 rounded-lg font-bold text-lg md:text-xl transition shadow-lg
+     cursor-pointer
+    "
+      onClick={handleLogin}
+    >
       Entrar
     </button>
   </div>
@@ -101,67 +112,71 @@ export default function LandingPage() {
 
 
       {/* Catálogo: Filmes + Séries */}
-      <section className="py-16 px-4 flex flex-col space-y-12">
-        {/* Filmes */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6 mx-10 md:mx-20">Lançamentos Imperdíveis</h2>
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide mx-10 md:mx-20">
-            {filmes.map(movie => (
-              <div 
-                key={movie._id} 
-                className="min-w-[120px] sm:min-w-[160px] md:min-w-[200px] relative group transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <Image
-                  src={movie.thumbnailUrl}
-                  alt={movie.title}
-                  width={200}
-                  height={300}
-                  className="rounded-lg w-full h-auto"
-                />
-                {movie.isNewRelease && (
-                  <span className="absolute top-2 left-2 bg-red-600 px-2 py-1 text-[10px] sm:text-xs rounded font-bold">
-                    INÉDITO
-                  </span>
-                )}
-                <div className="mt-2">
-                  <h3 className="font-semibold text-sm sm:text-base">{movie.title}</h3>
-                  <p className="text-xs sm:text-sm text-gray-300">{movie.releaseYear}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <section className="py-16 px-4 flex flex-col space-y-12">
+  {/* Filmes */}
+  <div>
+    <h2 className="text-3xl font-bold mb-6 mx-10 md:mx-20 text-white">Lançamentos Imperdíveis</h2>
+    <div 
+      className="flex space-x-3 overflow-x-auto scroll-custom mx-10 md:mx-20 snap-x scroll-smooth"
+      style={{ height: '220px' }} // altura fixa igual aos cards para evitar scroll vertical
+    >
+      {filmes.map(movie => (
+        <div 
+          key={movie._id} 
+          className="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] h-full relative flex-shrink-0 snap-start rounded-lg overflow-hidden shadow-lg group cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url(${movie.thumbnailUrl})` }}
+          ></div>
 
-        {/* Séries */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6 mx-10 md:mx-20">Séries em Alta</h2>
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide mx-10 md:mx-20">
-            {series.map(serie => (
-              <div 
-                key={serie._id} 
-                className="min-w-[120px] sm:min-w-[160px] md:min-w-[200px] relative group transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <Image
-                  src={serie.thumbnailUrl}
-                  alt={serie.title}
-                  width={200}
-                  height={300}
-                  className="rounded-lg w-full h-auto"
-                />
-                {serie.isNewRelease && (
-                  <span className="absolute top-2 left-2 bg-red-600 px-2 py-1 text-[10px] sm:text-xs rounded font-bold">
-                    INÉDITO
-                  </span>
-                )}
-                <div className="mt-2">
-                  <h3 className="font-semibold text-sm sm:text-base">{serie.title}</h3>
-                  <p className="text-xs sm:text-sm text-gray-300">{serie.releaseYear}</p>
-                </div>
-              </div>
-            ))}
+          <div className="absolute bottom-2 left-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
+            {movie.releaseYear}
           </div>
+
+          {movie.isNewRelease && (
+            <span className="absolute top-2 left-2 bg-red-600 px-1 py-0.5 text-[8px] sm:text-[10px] rounded-full font-bold shadow-sm">
+              INÉDITO
+            </span>
+          )}
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+
+  {/* Séries */}
+  <div>
+    <h2 className="text-3xl font-bold mb-6 mx-10 md:mx-20 text-white">Séries em Alta</h2>
+    <div 
+      className="flex space-x-3 overflow-x-auto scroll-custom mx-10 md:mx-20 snap-x scroll-smooth"
+      style={{ height: '220px' }} // mesma altura dos cards
+    >
+      {series.map(serie => (
+        <div 
+          key={serie._id} 
+          className="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] h-full relative flex-shrink-0 snap-start rounded-lg overflow-hidden shadow-lg group cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+            style={{ backgroundImage: `url(${serie.thumbnailUrl})` }}
+          ></div>
+
+          <div className="absolute bottom-2 left-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
+            {serie.releaseYear}
+          </div>
+
+          {serie.isNewRelease && (
+            <span className="absolute top-2 left-2 bg-red-600 px-1 py-0.5 text-[8px] sm:text-[10px] rounded-full font-bold shadow-sm">
+              INÉDITO
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
       {/* Benefícios */}
       <section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-center">
