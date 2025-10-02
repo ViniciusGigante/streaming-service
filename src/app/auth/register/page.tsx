@@ -4,14 +4,6 @@ import { useRouter } from 'next/navigation';
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default function RegisterPage() {
-
-useEffect(() => {
-  const accepted = localStorage.getItem("termsAccepted") === "true";
-  if (accepted && !form.termsAccepted) {
-    setForm(prev => ({ ...prev, termsAccepted: true }));
-  }
-}, []);
-
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -24,6 +16,13 @@ useEffect(() => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    const accepted = localStorage.getItem("termsAccepted") === "true";
+    if (accepted) {
+      setForm(prev => ({ ...prev, termsAccepted: true }));
+    }
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setForm(prev => ({
@@ -34,6 +33,11 @@ useEffect(() => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!form.termsAccepted) {
+      setMessage("Você deve aceitar os termos de serviço.");
+      return;
+    }
 
     if (form.password !== form.confirmPassword) {
       setMessage("As senhas não coincidem");
@@ -67,6 +71,7 @@ useEffect(() => {
           confirmPassword: "",
           termsAccepted: false,
         });
+        localStorage.removeItem("termsAccepted");
         router.push("/auth/login");
       }
     } catch (error) {
@@ -109,7 +114,7 @@ useEffect(() => {
                 required
                 value={form.name}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 placeholder="Seu nome completo"
               />
             </div>
@@ -125,7 +130,7 @@ useEffect(() => {
                 required
                 value={form.email}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 placeholder="Seu Email"
               />
             </div>
@@ -141,7 +146,7 @@ useEffect(() => {
                 required
                 value={form.password}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 placeholder="Mínimo 8 caracteres"
               />
             </div>
@@ -157,30 +162,33 @@ useEffect(() => {
                 required
                 value={form.confirmPassword}
                 onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:blue-600 focus:border-transparent"
+                className="mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 placeholder="Digite novamente sua senha"
               />
             </div>
           </div>
 
-          <div className="flex items-center">
-  <button
-    type="button"
-    onClick={() => {
-      if (!form.termsAccepted) {
-        // leva para a página de termos
-        router.push("/auth/terms");
-      } else {
-        // se já aceitou, clicar remove o estado (opcional)
-        setForm(prev => ({ ...prev, termsAccepted: false }));
-      }
-    }}
-    className={`px-4 py-2 rounded-md text-white transition
-      ${form.termsAccepted ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700"}`}
-  >
-    {form.termsAccepted ? "Aceito" : "Ler os termos de serviço"}
-  </button>
-</div>
+          <div className="flex items-center gap-2">
+            <input
+              id="termsAccepted"
+              name="termsAccepted"
+              type="checkbox"
+              checked={form.termsAccepted}
+              onChange={handleChange}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+            <label htmlFor="termsAccepted" className="text-sm text-gray-300">
+              Eu li e aceito os{" "}
+              <a
+                href="/auth/terms"
+                target="_blank"
+                className="text-blue-400 underline hover:text-blue-300"
+              >
+                termos de serviço
+              </a>
+            </label>
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -194,24 +202,26 @@ useEffect(() => {
           )}
 
           <div className="text-center">
-            <button type="button" className="text-sm text-gray-400 hover:text-gray-300 cursor-pointer"
+            <button
+              type="button"
+              className="text-sm text-gray-400 hover:text-gray-300 cursor-pointer"
               onClick={() => router.push('/auth/login')}
             >
               Já tem uma conta? Entrar
             </button>
           </div>
         </form>
-        <div className="mt-4 text-center">
-  <button
-    type="button"
-    className="flex items-center justify-center gap-2 mx-auto px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-600 transition-colors"
-    onClick={() => router.push("/auth/login")}
-  >
-    <ArrowRightOnRectangleIcon className="w-4 h-4" />
-    Voltar para Login
-  </button>
-</div>
 
+        <div className="mt-4 text-center">
+          <button
+            type="button"
+            className="flex items-center justify-center gap-2 mx-auto px-4 py-2 text-sm text-white bg-gray-700 rounded-md hover:bg-gray-600 transition-colors"
+            onClick={() => router.push("/auth/login")}
+          >
+            <ArrowRightOnRectangleIcon className="w-4 h-4" />
+            Voltar para Login
+          </button>
+        </div>
       </div>
     </div>
   );
