@@ -37,34 +37,68 @@ export default function LandingPage() {
     <div className="bg-black text-white">
       {/* Hero Section */}
       <section
-        className="relative h-screen flex flex-col justify-center items-center text-center px-4"
-        style={{
-          backgroundImage: "url('/background/pexels-audio-visual-art-10697887.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-black/80 to-transparent flex items-center px-4">
-          <Image src="/cineverse-logo.svg" width={200} height={80} alt="Cineverse Logo" />
-        </div>
+  className="relative h-screen flex flex-col justify-center items-center text-center px-4"
+  style={{
+    backgroundImage: "url('/background/pexels-audio-visual-art-10697887.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* Header com logo */}
+  <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between px-6">
+    <Image 
+      src="/cineverse-logo.svg" 
+      width={215} 
+      height={95} 
+      alt="Cineverse Logo" 
+    />
+  </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold z-10">Descubra um Universo de Entretenimento</h1>
-        <p className="text-lg md:text-xl max-w-2xl mt-4 z-10">
-          Assista onde e quando quiser, com qualidade excepcional e conteúdo exclusivo.
-        </p>
+  {/* Texto principal */}
+  <h1 className="text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-bold z-10 drop-shadow-lg leading-tight">
+    🎬 Descubra um Universo de Entretenimento
+  </h1>
+  <p className="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem] max-w-2xl mt-4 z-10 text-gray-200 drop-shadow-md">
+    Assista onde e quando quiser, com qualidade excepcional e conteúdo exclusivo.
+  </p>
 
-        <div className="flex space-x-4 mt-6 z-10">
-          <button
-            onClick={handleLogin}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition"
-          >
-            Entrar
-          </button>         
-        </div>
+  {/* Recursos / Destaques */}
+  <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-8 z-10 text-left max-w-4xl">
+    <div className="flex items-start space-x-3">
+      <span className="text-[1.5rem] md:text-[2rem]">📺</span>
+      <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
+        Streaming ilimitado de filmes e séries em alta qualidade.
+      </p>
+    </div>
+    <div className="flex items-start space-x-3">
+      <span className="text-[1.5rem] md:text-[2rem]">🎯</span>
+      <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
+        Recomendações personalizadas com base nos seus gostos.
+      </p>
+    </div>
+    <div className="flex items-start space-x-3">
+      <span className="text-[1.5rem] md:text-[2rem]">💾</span>
+      <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
+        Salve seus favoritos e continue de onde parou.
+      </p>
+    </div>
+  </div>
 
-        {/* Gradient Shadow na parte inferior */}
-        <div className="absolute bottom-0 left-0 w-full h-[110%] bg-gradient-to-t from-black/100 via-black/60 to-transparent z-0" />
-      </section>
+  {/* Call-to-action principal */}
+  <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-8 z-10">
+    <button className="bg-[#3B0764] hover:bg-[#4B0C8C] px-6 md:px-8 py-2 md:py-3 rounded-lg font-bold text-lg md:text-xl transition shadow-lg">
+      Comece Agora
+    </button>
+    <button className="bg-[#0F172A] hover:bg-[#1E293B] px-6 md:px-8 py-2 md:py-3 rounded-lg font-bold text-lg md:text-xl transition shadow-lg">
+      Entrar
+    </button>
+  </div>
+
+  {/* Gradient Shadow na parte inferior */}
+  <div className="absolute bottom-0 left-0 w-full h-[110%] bg-gradient-to-t from-black/100 via-black/60 to-transparent z-0" />
+</section>
+
+
 
       {/* Catálogo: Filmes + Séries */}
       <section className="py-16 px-4 flex flex-col space-y-12">
