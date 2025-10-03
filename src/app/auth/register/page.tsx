@@ -219,7 +219,7 @@ export default function RegisterPage() {
             onClick={() => router.push("/auth/login")}
           >
             <ArrowRightOnRectangleIcon className="w-4 h-4" />
-            Voltar para Login
+            Voltar
           </button>
         </div>
       </div>

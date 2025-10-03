@@ -10,7 +10,6 @@ interface SessionPayload extends JwtPayload {
 }
 
 export async function POST(req: NextRequest) {
-  console.log("Recebido POST /api/perfil/favoritos/add");
 
   try {
     // Validação do token

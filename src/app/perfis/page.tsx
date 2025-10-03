@@ -12,10 +12,15 @@ interface Profile {
 }
 
 export default function SelecaoPerfilPage() {
-
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [manageMode, setManageMode] = useState(false);
+
+  // confirmação de exclusão
+  const [profileToDelete, setProfileToDelete] = useState<Profile | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProfiles() {
@@ -25,6 +30,8 @@ export default function SelecaoPerfilPage() {
 
         if (res.ok) {
           setProfiles(data.profiles);
+        } else {
+          console.error("Erro ao buscar perfis:", data);
         }
       } catch (err) {
         console.error("Erro ao buscar perfis:", err);
@@ -35,16 +42,75 @@ export default function SelecaoPerfilPage() {
   }, []);
 
   const handleSelectProfile = (profile: Profile) => {
+    if (manageMode) return;
     localStorage.setItem("activeProfile", JSON.stringify(profile));
     router.push("/Home");
   };
 
   const handleProfileCreated = (newProfile: Profile) => {
-    setProfiles([...profiles, newProfile]);
+    setProfiles(prev => [...prev, newProfile]);
   };
+
+  // função que chama a API para deletar o perfil
+  async function confirmDeleteProfile() {
+    if (!profileToDelete) return;
+
+    // prevenção cliente: não permitir remover último perfil
+    if (profiles.length <= 1) {
+      setErrorMessage("Você não pode excluir o último perfil da conta.");
+      return;
+    }
+
+    setDeleting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/perfis/configPerfis/deletePerfil", {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ profileId: profileToDelete._id }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data?.error || "Erro ao excluir perfil.");
+        setDeleting(false);
+        return;
+      }
+
+      // remover do state para atualizar UI
+      setProfiles(prev => prev.filter(p => p._id !== profileToDelete._id));
+
+      // se o perfil excluído for o activeProfile no localStorage, removemos
+      try {
+        const active = localStorage.getItem("activeProfile");
+        if (active) {
+          const activeObj = JSON.parse(active);
+          if (activeObj && activeObj._id === profileToDelete._id) {
+            localStorage.removeItem("activeProfile");
+          }
+        }
+      } catch (e) {
+        // ignore parse errors
+      }
+
+      // fechar modal
+      setProfileToDelete(null);
+      setDeleting(false);
+    } catch (err) {
+      console.error("Erro ao chamar API de delete:", err);
+      setErrorMessage("Erro de rede ao excluir perfil.");
+      setDeleting(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] flex flex-col px-4">
+      {/* Logo */}
       <div className="mt-4 mx-aut self-start">
         <Image
           src="/cineverse-logo-dark.svg"
@@ -54,6 +120,7 @@ export default function SelecaoPerfilPage() {
         />
       </div>
 
+      {/* Conteúdo central */}
       <div className="flex-1 flex flex-col items-center justify-center text-center mb-12">
         <h1 className="text-4xl font-bold text-white mb-6">Quem está assistindo?</h1>
         
@@ -61,20 +128,41 @@ export default function SelecaoPerfilPage() {
           {profiles.map((profile) => (
             <div
               key={profile._id}
-              className="group cursor-pointer"
+              className="group relative cursor-pointer"
               onClick={() => handleSelectProfile(profile)}
             >
+              {/* Botão excluir - só aparece no modo gerenciar */}
+              {manageMode && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation(); // não seleciona perfil
+                    setErrorMessage(null);
+                    setProfileToDelete(profile); // abre modal de confirmação
+                  }}
+                  aria-label={`Excluir perfil ${profile.name}`}
+                  className="absolute top-0 right-0 w-8 h-8 bg-red-600 rounded-s-md flex items-center justify-center text-white text-sm hover:bg-red-700 transition z-10"
+                >
+                  🗑
+                </button>
+              )}
+
+              {/* Avatar */}
               <div
-                className="w-32 h-32 bg-gray-700 rounded-md group-hover:border-2 group-hover:border-white transition-all mb-3 flex items-center justify-center"
+                className={`w-32 h-32 rounded-md mb-3 flex items-center justify-center transition-all ${
+                  manageMode ? "border-2 border-red-600" : "bg-gray-700 group-hover:border-2 group-hover:border-white"
+                }`}
               >
                 <span className="text-white text-2xl">{profile.name[0]}</span>
               </div>
-              <p className="text-gray-400 group-hover:text-white transition-colors">
+
+              {/* Nome */}
+              <p className={`text-gray-400 transition-colors ${manageMode ? "text-red-400" : "group-hover:text-white"}`}>
                 {profile.name}
               </p>
             </div>
           ))}
 
+          {/* Adicionar perfil */}
           <div
             className="group cursor-pointer"
             onClick={() => setModalOpen(true)}
@@ -87,16 +175,68 @@ export default function SelecaoPerfilPage() {
         </div>
       </div>
 
-      <button className="border border-gray-600 text-gray-400 px-8 py-2 hover:border-white hover:text-white transition-colors">
-        GERENCIAR PERFIS
-      </button>
+      {/* Botão Gerenciar Perfis */}
+      <div className="mb-8">
+        <button
+          onClick={() => setManageMode(!manageMode)}
+          className={`px-8 py-2 rounded-lg font-semibold transition-all duration-300
+            ${manageMode
+              ? "bg-red-700 text-white hover:bg-red-600"
+              : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white shadow-md"
+            }`}
+        >
+          {manageMode ? "CANCELAR" : "GERENCIAR PERFIS"}
+        </button>
+      </div>
 
+      {/* Modal de Adicionar Perfil */}
       {modalOpen && (
         <AdicionarPerfilModal
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
           onProfileCreated={handleProfileCreated}
         />
+      )}
+
+      {/* Modal de confirmação de exclusão */}
+      {profileToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* overlay */}
+          <div
+            className="absolute inset-0 bg-black/60"
+            onClick={() => { if (!deleting) setProfileToDelete(null); }}
+          />
+          {/* modal box */}
+          <div className="relative bg-[#161616] max-w-md w-full p-6 rounded-lg shadow-xl border border-gray-800 z-10">
+            <h3 className="text-lg font-semibold text-white mb-2">Confirmar exclusão</h3>
+            <p className="text-sm text-gray-300 mb-4">
+              Tem certeza que deseja excluir o perfil <span className="font-medium text-white">{profileToDelete.name}</span>?
+              Essa ação não pode ser desfeita.
+            </p>
+
+            {errorMessage && (
+              <div className="mb-3 text-sm text-red-400">{errorMessage}</div>
+            )}
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => { if (!deleting) setProfileToDelete(null); }}
+                disabled={deleting}
+                className="px-4 py-2 rounded-md bg-gray-700 text-gray-200 hover:bg-gray-600 transition"
+              >
+                Cancelar
+              </button>
+
+              <button
+                onClick={confirmDeleteProfile}
+                disabled={deleting}
+                className="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition"
+              >
+                {deleting ? "Excluindo..." : "Excluir"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

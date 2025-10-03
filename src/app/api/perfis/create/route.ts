@@ -25,6 +25,11 @@ export async function POST(req: NextRequest) {
     const db = await getDatabase();
     const profilesCollection = db.collection("Profiles");
 
+    const existingProfile = await profilesCollection.findOne({ name: name.trim(), accountId: new ObjectId(payload.userId) });
+    if (existingProfile) {
+      return NextResponse.json({ message: "Já existe um perfil com esse nome" }, { status: 400 });
+    }
+
     const newProfile = {
       name: name.trim(),
       accountId: new ObjectId(payload.userId),
