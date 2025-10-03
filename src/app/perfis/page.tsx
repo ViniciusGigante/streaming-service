@@ -17,11 +17,19 @@ export default function SelecaoPerfilPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [manageMode, setManageMode] = useState(false);
 
-  // confirmação de exclusão
+  // Exclusão
   const [profileToDelete, setProfileToDelete] = useState<Profile | null>(null);
   const [deleting, setDeleting] = useState(false);
+
+  // Renomeação
+  const [profileToRename, setProfileToRename] = useState<Profile | null>(null);
+  const [newName, setNewName] = useState("");
+  const [renaming, setRenaming] = useState(false);
+
+  // Mensagem de erro
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Buscar perfis
   useEffect(() => {
     async function fetchProfiles() {
       try {
@@ -37,7 +45,6 @@ export default function SelecaoPerfilPage() {
         console.error("Erro ao buscar perfis:", err);
       }
     }
-
     fetchProfiles();
   }, []);
 
@@ -51,11 +58,10 @@ export default function SelecaoPerfilPage() {
     setProfiles(prev => [...prev, newProfile]);
   };
 
-  // função que chama a API para deletar o perfil
+  // Deletar perfil
   async function confirmDeleteProfile() {
     if (!profileToDelete) return;
 
-    // prevenção cliente: não permitir remover último perfil
     if (profiles.length <= 1) {
       setErrorMessage("Você não pode excluir o último perfil da conta.");
       return;
@@ -68,9 +74,7 @@ export default function SelecaoPerfilPage() {
       const res = await fetch("/api/perfis/configPerfis/deletePerfil", {
         method: "DELETE",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ profileId: profileToDelete._id }),
       });
 
@@ -82,10 +86,8 @@ export default function SelecaoPerfilPage() {
         return;
       }
 
-      // remover do state para atualizar UI
       setProfiles(prev => prev.filter(p => p._id !== profileToDelete._id));
 
-      // se o perfil excluído for o activeProfile no localStorage, removemos
       try {
         const active = localStorage.getItem("activeProfile");
         if (active) {
@@ -94,11 +96,8 @@ export default function SelecaoPerfilPage() {
             localStorage.removeItem("activeProfile");
           }
         }
-      } catch (e) {
-        // ignore parse errors
-      }
+      } catch (e) {}
 
-      // fechar modal
       setProfileToDelete(null);
       setDeleting(false);
     } catch (err) {
@@ -108,10 +107,46 @@ export default function SelecaoPerfilPage() {
     }
   }
 
+  // Renomear perfil
+  async function confirmRenameProfile() {
+    if (!profileToRename || !newName.trim()) return;
+    setRenaming(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await fetch("/api/perfis/configPerfis/renamePerfil", {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ profileId: profileToRename._id, newName }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data?.error || "Erro ao renomear perfil.");
+        setRenaming(false);
+        return;
+      }
+
+      setProfiles(prev =>
+        prev.map(p => p._id === profileToRename._id ? { ...p, name: newName } : p)
+      );
+
+      setProfileToRename(null);
+      setNewName("");
+      setRenaming(false);
+    } catch (err) {
+      console.error("Erro ao renomear perfil:", err);
+      setErrorMessage("Erro de rede ao renomear perfil.");
+      setRenaming(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#1E1E1E] flex flex-col px-4">
       {/* Logo */}
-      <div className="mt-4 mx-aut self-start">
+      <div className="mt-4 mx-auto">
         <Image
           src="/cineverse-logo-dark.svg"
           width={300}
@@ -123,35 +158,45 @@ export default function SelecaoPerfilPage() {
       {/* Conteúdo central */}
       <div className="flex-1 flex flex-col items-center justify-center text-center mb-12">
         <h1 className="text-4xl font-bold text-white mb-6">Quem está assistindo?</h1>
-        
+
         <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
-          {profiles.map((profile) => (
+          {profiles.map(profile => (
             <div
               key={profile._id}
               className="group relative cursor-pointer"
               onClick={() => handleSelectProfile(profile)}
             >
-              {/* Botão excluir - só aparece no modo gerenciar */}
+              {/* Botões gerenciar */}
               {manageMode && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation(); // não seleciona perfil
-                    setErrorMessage(null);
-                    setProfileToDelete(profile); // abre modal de confirmação
-                  }}
-                  aria-label={`Excluir perfil ${profile.name}`}
-                  className="absolute top-0 right-0 w-8 h-8 bg-red-600 rounded-s-md flex items-center justify-center text-white text-sm hover:bg-red-700 transition z-10"
-                >
-                  🗑
-                </button>
+                <>
+                  <button
+                    onClick={e => {
+                      e.stopPropagation();
+                      setErrorMessage(null);
+                      setProfileToDelete(profile);
+                    }}
+                    className="absolute top-0 right-0 w-8 h-8 bg-red-600 rounded-s-md flex items-center justify-center text-white text-sm hover:bg-red-700 transition z-10"
+                    aria-label={`Excluir perfil ${profile.name}`}
+                  >
+                    🗑
+                  </button>
+                  <button
+                    onClick={e => {
+                      e.stopPropagation();
+                      setErrorMessage(null);
+                      setProfileToRename(profile);
+                      setNewName(profile.name);
+                    }}
+                    className="absolute top-10 right-0 w-8 h-8 bg-blue-600 rounded-s-md flex items-center justify-center text-white text-sm hover:bg-blue-700 transition z-10"
+                    aria-label={`Renomear perfil ${profile.name}`}
+                  >
+                    ✏️
+                  </button>
+                </>
               )}
 
               {/* Avatar */}
-              <div
-                className={`w-32 h-32 rounded-md mb-3 flex items-center justify-center transition-all ${
-                  manageMode ? "border-2 border-red-600" : "bg-gray-700 group-hover:border-2 group-hover:border-white"
-                }`}
-              >
+              <div className={`w-32 h-32 rounded-md mb-3 flex items-center justify-center transition-all ${manageMode ? "border-2 border-red-600" : "bg-gray-700 group-hover:border-2 group-hover:border-white"}`}>
                 <span className="text-white text-2xl">{profile.name[0]}</span>
               </div>
 
@@ -163,10 +208,7 @@ export default function SelecaoPerfilPage() {
           ))}
 
           {/* Adicionar perfil */}
-          <div
-            className="group cursor-pointer"
-            onClick={() => setModalOpen(true)}
-          >
+          <div className="group cursor-pointer" onClick={() => setModalOpen(true)}>
             <div className="w-32 h-32 bg-gray-800 rounded-md flex items-center justify-center group-hover:bg-gray-700 transition-all mb-3">
               <div className="text-4xl text-gray-400 group-hover:text-white">+</div>
             </div>
@@ -176,7 +218,7 @@ export default function SelecaoPerfilPage() {
       </div>
 
       {/* Botão Gerenciar Perfis */}
-      <div className="mb-8">
+      <div className="mb-8 mx-auto">
         <button
           onClick={() => setManageMode(!manageMode)}
           className={`px-8 py-2 rounded-lg font-semibold transition-all duration-300
@@ -201,12 +243,7 @@ export default function SelecaoPerfilPage() {
       {/* Modal de confirmação de exclusão */}
       {profileToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* overlay */}
-          <div
-            className="absolute inset-0 bg-black/60"
-            onClick={() => { if (!deleting) setProfileToDelete(null); }}
-          />
-          {/* modal box */}
+          <div className="absolute inset-0 bg-black/60" onClick={() => { if (!deleting) setProfileToDelete(null); }} />
           <div className="relative bg-[#161616] max-w-md w-full p-6 rounded-lg shadow-xl border border-gray-800 z-10">
             <h3 className="text-lg font-semibold text-white mb-2">Confirmar exclusão</h3>
             <p className="text-sm text-gray-300 mb-4">
@@ -214,9 +251,7 @@ export default function SelecaoPerfilPage() {
               Essa ação não pode ser desfeita.
             </p>
 
-            {errorMessage && (
-              <div className="mb-3 text-sm text-red-400">{errorMessage}</div>
-            )}
+            {errorMessage && <div className="mb-3 text-sm text-red-400">{errorMessage}</div>}
 
             <div className="flex justify-end gap-3">
               <button
@@ -226,13 +261,46 @@ export default function SelecaoPerfilPage() {
               >
                 Cancelar
               </button>
-
               <button
                 onClick={confirmDeleteProfile}
                 disabled={deleting}
                 className="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition"
               >
                 {deleting ? "Excluindo..." : "Excluir"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de renomeação */}
+      {profileToRename && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60" onClick={() => { if (!renaming) setProfileToRename(null); }} />
+          <div className="relative bg-[#161616] max-w-md w-full p-6 rounded-lg shadow-xl border border-gray-800 z-10">
+            <h3 className="text-lg font-semibold text-white mb-2">Renomear perfil</h3>
+            <input
+              type="text"
+              value={newName}
+              onChange={e => setNewName(e.target.value)}
+              className="w-full p-2 mb-4 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none"
+              placeholder="Novo nome do perfil"
+            />
+            {errorMessage && <div className="mb-3 text-sm text-red-400">{errorMessage}</div>}
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => { if (!renaming) setProfileToRename(null); }}
+                disabled={renaming}
+                className="px-4 py-2 rounded-md bg-gray-700 text-gray-200 hover:bg-gray-600 transition"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmRenameProfile}
+                disabled={renaming}
+                className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition"
+              >
+                {renaming ? "Renomeando..." : "Renomear"}
               </button>
             </div>
           </div>
