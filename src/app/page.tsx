@@ -55,34 +55,41 @@ export default function LandingPage() {
   </div>
 
   {/* Texto principal */}
-  <h1 className="text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-bold z-10 drop-shadow-lg leading-tight">
-    🎬 Descubra um Universo de Entretenimento
-  </h1>
+  <h1
+  className="font-bold z-10 drop-shadow-lg leading-tight"
+  style={{
+    fontSize: 'clamp(2rem, 5vw, 4.5rem)',
+  }}
+>
+  Descubra um Universo de Entretenimento
+</h1>
   <p className="text-[1rem] md:text-[1.25rem] lg:text-[1.5rem] max-w-2xl mt-4 z-10 text-gray-200 drop-shadow-md">
     Assista onde e quando quiser, com qualidade excepcional e conteúdo exclusivo.
   </p>
 
   {/* Recursos / Destaques */}
-  <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-8 z-10 text-left max-w-4xl">
-    <div className="flex items-start space-x-3">
-      <span className="text-[1.5rem] md:text-[2rem]">📺</span>
-      <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
-        Streaming ilimitado de filmes e séries em alta qualidade.
-      </p>
-    </div>
-    <div className="flex items-start space-x-3">
-      <span className="text-[1.5rem] md:text-[2rem]">🎯</span>
-      <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
-        Recomendações personalizadas com base nos seus gostos.
-      </p>
-    </div>
-    <div className="flex items-start space-x-3">
-      <span className="text-[1.5rem] md:text-[2rem]">💾</span>
-      <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
-        Salve seus favoritos e continue de onde parou.
-      </p>
-    </div>
+  {/* Recursos / Destaques */}
+<div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 mt-8 z-10 text-left max-w-4xl">
+  <div className="flex items-start space-x-3 bg-gray-800/40 rounded-lg p-2 md:p-3">
+    <span className="text-[1.5rem] md:text-[2rem]">📺</span>
+    <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
+      Streaming ilimitado de filmes e séries em alta qualidade.
+    </p>
   </div>
+  <div className="flex items-start space-x-3 bg-gray-800/40 rounded-lg p-2 md:p-3">
+    <span className="text-[1.5rem] md:text-[2rem]">🎯</span>
+    <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
+      Recomendações personalizadas com base nos seus gostos.
+    </p>
+  </div>
+  <div className="flex items-start space-x-3 bg-gray-800/40 rounded-lg p-2 md:p-3">
+    <span className="text-[1.5rem] md:text-[2rem]">💾</span>
+    <p className="text-gray-200 text-[0.9rem] md:text-[1rem] lg:text-[1.1rem]">
+      Salve seus favoritos e continue de onde parou.
+    </p>
+  </div>
+</div>
+
 
   {/* Call-to-action principal */}
   <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-8 z-10">
@@ -116,90 +123,154 @@ export default function LandingPage() {
   {/* Filmes */}
   <div>
     <h2 className="text-3xl font-bold mb-6 mx-10 md:mx-20 text-white">Lançamentos Imperdíveis</h2>
-    <div 
-      className="flex space-x-3 overflow-x-auto scroll-custom mx-10 md:mx-20 snap-x scroll-smooth"
-      style={{ height: '220px' }} // altura fixa igual aos cards para evitar scroll vertical
-    >
-      {filmes.map(movie => (
-        <div 
-          key={movie._id} 
-          className="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] h-full relative flex-shrink-0 snap-start rounded-lg overflow-hidden shadow-lg group cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-            style={{ backgroundImage: `url(${movie.thumbnailUrl})` }}
-          ></div>
+    
+    <div className="relative mx-10 md:mx-20">
+      {/* Botão Esquerda */}
+      <button
+        onClick={() => document.getElementById("filmes-row")?.scrollBy({ left: -300, behavior: "smooth" })}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 
+                   bg-black/40 hover:bg-black/70 text-white 
+                   w-12 h-12 flex items-center justify-center 
+                   rounded-full shadow-lg transition duration-300"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
 
-          <div className="absolute bottom-2 left-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
-            {movie.releaseYear}
+      {/* Lista rolável */}
+      <div
+        id="filmes-row"
+        className="flex space-x-3 overflow-x-auto scroll-hidden snap-x scroll-smooth"
+        style={{ height: "220px" }}
+      >
+        {filmes.map(movie => (
+          <div 
+            key={movie._id} 
+            className="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] h-full relative flex-shrink-0 snap-start rounded-lg overflow-hidden shadow-lg group cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: `url(${movie.thumbnailUrl})` }}
+            ></div>
+
+            <div className="absolute bottom-2 left-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
+              {movie.releaseYear}
+            </div>
+
+            {movie.isNewRelease && (
+              <span className="absolute top-2 left-2 bg-red-600 px-1 py-0.5 text-[8px] sm:text-[10px] rounded-full font-bold shadow-sm">
+                INÉDITO
+              </span>
+            )}
           </div>
+        ))}
+      </div>
 
-          {movie.isNewRelease && (
-            <span className="absolute top-2 left-2 bg-red-600 px-1 py-0.5 text-[8px] sm:text-[10px] rounded-full font-bold shadow-sm">
-              INÉDITO
-            </span>
-          )}
-        </div>
-      ))}
+      {/* Botão Direita */}
+      <button
+        onClick={() => document.getElementById("filmes-row")?.scrollBy({ left: 300, behavior: "smooth" })}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 
+                   bg-black/40 hover:bg-black/70 text-white 
+                   w-12 h-12 flex items-center justify-center 
+                   rounded-full shadow-lg transition duration-300"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   </div>
 
   {/* Séries */}
   <div>
     <h2 className="text-3xl font-bold mb-6 mx-10 md:mx-20 text-white">Séries em Alta</h2>
-    <div 
-      className="flex space-x-3 overflow-x-auto scroll-custom mx-10 md:mx-20 snap-x scroll-smooth"
-      style={{ height: '220px' }} // mesma altura dos cards
-    >
-      {series.map(serie => (
-        <div 
-          key={serie._id} 
-          className="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] h-full relative flex-shrink-0 snap-start rounded-lg overflow-hidden shadow-lg group cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-            style={{ backgroundImage: `url(${serie.thumbnailUrl})` }}
-          ></div>
+    
+    <div className="relative mx-10 md:mx-20">
+      {/* Botão Esquerda */}
+      <button
+        onClick={() => document.getElementById("series-row")?.scrollBy({ left: -300, behavior: "smooth" })}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 
+                   bg-black/40 hover:bg-black/70 text-white 
+                   w-12 h-12 flex items-center justify-center 
+                   rounded-full shadow-lg transition duration-300"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
 
-          <div className="absolute bottom-2 left-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
-            {serie.releaseYear}
+      {/* Lista rolável */}
+      <div
+        id="series-row"
+        className="flex space-x-3 overflow-x-auto scroll-hidden snap-x scroll-smooth"
+        style={{ height: "220px" }}
+      >
+        {series.map(serie => (
+          <div 
+            key={serie._id} 
+            className="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] h-full relative flex-shrink-0 snap-start rounded-lg overflow-hidden shadow-lg group cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+              style={{ backgroundImage: `url(${serie.thumbnailUrl})` }}
+            ></div>
+
+            <div className="absolute bottom-2 left-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
+              {serie.releaseYear}
+            </div>
+
+            {serie.isNewRelease && (
+              <span className="absolute top-2 left-2 bg-red-600 px-1 py-0.5 text-[8px] sm:text-[10px] rounded-full font-bold shadow-sm">
+                INÉDITO
+              </span>
+            )}
           </div>
+        ))}
+      </div>
 
-          {serie.isNewRelease && (
-            <span className="absolute top-2 left-2 bg-red-600 px-1 py-0.5 text-[8px] sm:text-[10px] rounded-full font-bold shadow-sm">
-              INÉDITO
-            </span>
-          )}
-        </div>
-      ))}
+      {/* Botão Direita */}
+      <button
+        onClick={() => document.getElementById("series-row")?.scrollBy({ left: 300, behavior: "smooth" })}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 
+                   bg-black/40 hover:bg-black/70 text-white 
+                   w-12 h-12 flex items-center justify-center 
+                   rounded-full shadow-lg transition duration-300"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   </div>
 </section>
 
 
 
+
       {/* Benefícios */}
-      <section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-center">
-        <h2 className="text-3xl font-bold mb-12">Por que escolher o Cineverse?</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
-            <h3 className="text-xl font-semibold mb-2">+1000 Filmes</h3>
-            <p className="text-gray-400 text-sm">Um catálogo sempre atualizado para você não ficar sem opções.</p>
-          </div>
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
-            <h3 className="text-xl font-semibold mb-2">Acesse no Celular</h3>
-            <p className="text-gray-400 text-sm">Compatível com smartphones, tablets e Smart TVs.</p>
-          </div>
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
-            <h3 className="text-xl font-semibold mb-2">Sem Anúncios</h3>
-            <p className="text-gray-400 text-sm">Assista seus conteúdos sem interrupções chatas.</p>
-          </div>
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
-            <h3 className="text-xl font-semibold mb-2">Qualidade HD/4K</h3>
-            <p className="text-gray-400 text-sm">Experiência de cinema direto na sua tela.</p>
-          </div>
-        </div>
-      </section>
+     <section className="py-20 px-6 bg-gradient-to-t from-gray-900 to-transparent text-center">
+  <h2 className="text-3xl font-bold mb-12">Por que escolher o Cineverse?</h2>
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+    <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+      <h3 className="text-xl font-semibold mb-2">+1000 Filmes</h3>
+      <p className="text-gray-400 text-sm">Um catálogo sempre atualizado para você não ficar sem opções.</p>
+    </div>
+    <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+      <h3 className="text-xl font-semibold mb-2">Acesse no Celular</h3>
+      <p className="text-gray-400 text-sm">Compatível com smartphones, tablets e Smart TVs.</p>
+    </div>
+    <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+      <h3 className="text-xl font-semibold mb-2">Sem Anúncios</h3>
+      <p className="text-gray-400 text-sm">Assista seus conteúdos sem interrupções chatas.</p>
+    </div>
+    <div className="bg-gray-800 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+      <h3 className="text-xl font-semibold mb-2">Qualidade HD/4K</h3>
+      <p className="text-gray-400 text-sm">Experiência de cinema direto na sua tela.</p>
+    </div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer className="bg-black py-12 px-4 text-gray-400 text-sm">

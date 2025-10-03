@@ -1,22 +1,11 @@
 @import "tailwindcss";
 
-/* Barra de scroll horizontal moderna e discreta */
-.scroll-custom::-webkit-scrollbar {
-  height: 6px; /* altura da barra horizontal */
+.scroll-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
-.scroll-custom::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.2); /* cor do fundo da barra */
-  border-radius: 3px;
+.scroll-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
-.scroll-custom::-webkit-scrollbar-thumb {
-  background-color: rgba(255,255,255,0.3); /* cor da "pegada" */
-  border-radius: 3px;
-}
-
-.scroll-custom {
-  -ms-overflow-style: none;  /* IE/Edge */
-  scrollbar-width: thin;     /* Firefox */
-  scrollbar-color: rgba(255,255,255,0.3) rgba(0,0,0,0.2); /* Firefox */
-}
