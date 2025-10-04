@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
 import Banner, { Movie } from "./components/banner";
@@ -36,9 +36,11 @@ export default function HomePage() {
   });
   const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null);
-  const [isSearching, setIsSearching] = useState(false);
+  // const [isSearching, setIsSearching] = useState(false);
 
   const router = useRouter();
+  const moviesRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const seriesRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const handleExpandCategory = (category: string, type: 'movie' | 'series') => {
     const encodedCategory = encodeURIComponent(category);
@@ -48,6 +50,13 @@ export default function HomePage() {
   const handleCloseBanner = () => {
     setSelectedMovie(null);
   }
+
+  const scrollToCategory = (category: string, type: 'movie' | 'series') => {
+  const ref = type === 'movie' ? moviesRefs.current[category] : seriesRefs.current[category];
+  if (ref) {
+    ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
 
   useEffect(() => {
     async function fetchData() {
@@ -99,11 +108,36 @@ export default function HomePage() {
           movie={selectedMovie}
           onClose={() => handleCloseBanner()}
         />
+        <div className="scroll-default flex gap-3 mb-4 overflow-x-auto">
+  
+  {Object.keys(moviesByCategory).map(category => (
+    <button
+      key={category}
+      onClick={() => scrollToCategory(category, 'movie')}
+      className="px-3 py-1 mt-20 bg-blue-600 text-white rounded"
+    >
+      {category}
+    </button>
+  ))}
+
+  {Object.keys(seriesByCategory).map(category => (
+    <button
+      key={category}
+      onClick={() => scrollToCategory(category, 'series')}
+      className="px-3 py-1 mt-20 bg-blue-600 text-white rounded"
+    >
+      {category}
+    </button>
+  ))}
+</div>
+
 
         {/* Filmes */}
         <div className="scroll-default py-8 px-4 space-y-12 mt-10">
           {Object.entries(moviesByCategory).map(([category, movies]: [string, Movie[]]) => (
-            <div key={category}>
+            <div key={category}
+            ref={el => { moviesRefs.current[category] = el; }}
+            >
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
                 <button
@@ -144,7 +178,10 @@ export default function HomePage() {
 
           {/* Séries */}
           {Object.entries(seriesByCategory).map(([category, seriesList]: [string, Series[]]) => (
-            <div key={category}>
+            <div key={category}
+              ref={el => { seriesRefs.current[category] = el; }}
+
+            >
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
                 <button
@@ -168,7 +205,7 @@ export default function HomePage() {
                       className="w-full h-60 object-cover"
                       width={200}
                       height={300}
-                    />
+                    /> 
                     <div
                       className="p-3"
                       style={{
