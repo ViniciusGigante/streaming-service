@@ -4,7 +4,8 @@ import {
   HomeIcon,    
   UserIcon,  
   BellIcon,
-  ArrowRightOnRectangleIcon
+  ArrowRightOnRectangleIcon,
+  Cog6ToothIcon
 } from "@heroicons/react/24/outline";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -36,6 +37,11 @@ export default function Sidebar() {
     window.addEventListener('resize', checkDesktop);
     return () => window.removeEventListener('resize', checkDesktop);
   }, []);
+
+  const logout = async () => {
+    await fetch("/api/auth/logout",{ method: "POST" })
+    router.push("/");
+  } 
 
   const Tooltip = ({ text }: { text: string }) => (
     <span className="absolute bottom-0 mb-8 w-max rounded bg-gray-900 text-white text-xs px-2 py-1 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity pointer-events-none">
@@ -112,7 +118,7 @@ export default function Sidebar() {
           <IconButton
             icon={ArrowRightOnRectangleIcon}
             text="Sair"
-            onClick={() => console.log('Sair')}
+            onClick={() => logout()}
           />
         </div>
       )}
@@ -162,7 +168,7 @@ export default function Sidebar() {
               <IconButton
                 icon={ArrowRightOnRectangleIcon}
                 text="Sair"
-                onClick={() => console.log('Sair')}
+                onClick={() => logout()}
               />
               <span>Sair</span>
             </div>

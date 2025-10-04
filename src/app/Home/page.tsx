@@ -176,11 +176,6 @@ export default function HomePage() {
                       }}
                     >
                       <h3 className="font-semibold text-sm truncate text-white">{series.title}</h3>
-                      {series.isNewRelease && (
-                        <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
-                          Novo
-                        </span>
-                      )}
                     </div>
                   </div>
                 ))}
