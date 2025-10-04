@@ -17,19 +17,19 @@ export default function SelecaoPerfilPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [manageMode, setManageMode] = useState(false);
 
-  // Exclusão
+
   const [profileToDelete, setProfileToDelete] = useState<Profile | null>(null);
   const [deleting, setDeleting] = useState(false);
 
-  // Renomeação
+
   const [profileToRename, setProfileToRename] = useState<Profile | null>(null);
   const [newName, setNewName] = useState("");
   const [renaming, setRenaming] = useState(false);
 
-  // Mensagem de erro
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Buscar perfis
+
   useEffect(() => {
     async function fetchProfiles() {
       try {
@@ -58,7 +58,7 @@ export default function SelecaoPerfilPage() {
     setProfiles(prev => [...prev, newProfile]);
   };
 
-  // Deletar perfil
+
   async function confirmDeleteProfile() {
     if (!profileToDelete) return;
 
@@ -107,7 +107,6 @@ export default function SelecaoPerfilPage() {
     }
   }
 
-  // Renomear perfil
   async function confirmRenameProfile() {
     if (!profileToRename || !newName.trim()) return;
     setRenaming(true);
@@ -221,13 +220,18 @@ export default function SelecaoPerfilPage() {
       <div className="mb-8 mx-auto">
         <button
           onClick={() => setManageMode(!manageMode)}
-          className={`px-8 py-2 rounded-lg font-semibold transition-all duration-300
+          className={`px-8 py-2 m-1 rounded-lg font-semibold transition-all duration-300
             ${manageMode
               ? "bg-red-700 text-white hover:bg-red-600"
               : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white shadow-md"
             }`}
         >
-          {manageMode ? "CANCELAR" : "GERENCIAR PERFIS"}
+          {manageMode ? "Cancelar" : "Gerenciar Perfis"}
+        </button>
+        <button className="px-8 py-2 m-1 rounded-lg font-semibold transition-all duration-300 bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white shadow-md"
+           onClick={() => {router.push(`/`)}}
+        >
+          Voltar ao início
         </button>
       </div>
 

@@ -123,15 +123,15 @@ export default function HomePage() {
                 {movies.map((movie: Movie) => (
                   <div
                     key={movie._id}
-                    className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden"
+                    className="min-w-[180px] flex-shrink-0  rounded-lg overflow-hidden"
                     onClick={() => setSelectedMovie(movie)}
                   >
                    <Image
   src={movie.thumbnailUrl} 
   alt={movie.title}
-  className="w-full h-48 object-cover"
-  width={200}
-  height={300}
+  className="w-full h-60 object-cover"
+  width={200} //200
+  height={300} //300
 />
 
                     <div className="p-3">
@@ -180,7 +180,7 @@ export default function HomePage() {
 
                     <div className="p-3">
   <h3 className="font-semibold text-sm truncate">{series.title}</h3>
-  <p className="text-xs text-gray-400 mt-1">Ano: {series.releaseYear}</p>
+  
   {series.isNewRelease && (
     <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
       Novo
