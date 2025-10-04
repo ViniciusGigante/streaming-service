@@ -4,9 +4,20 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Sidebar from "../../components/sidebar";
 import Header from "../../components/header";
+import Banner, {Movie} from "../../components/banner";
 import Image from "next/image";
 
 interface ContentItem {
+  _id: string;
+  title: string;
+  description: string;
+  releaseYear: number;
+  thumbnailUrl: string;
+  videoUrl: string;
+  isNewRelease: boolean;
+}
+
+interface Series {
   _id: string;
   title: string;
   description: string;
@@ -24,6 +35,7 @@ export default function CategoriaExpandida() {
   const categoria = decodeURIComponent(params.categoria as string);
   const type = searchParams.get('type');
   
+   const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null);
   const [items, setItems] = useState<ContentItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -58,12 +70,20 @@ export default function CategoriaExpandida() {
 
   const handleBack = () => router.back();
 
+   const handleCloseBanner = () => {
+    setSelectedMovie(null);
+  }
+
   if (loading) {
     return (
       <div className="w-full min-h-screen bg-[#b8b8b8]">
         <Sidebar />
         <section className="min-h-screen relative flex-1 bg-[#1E1E1E] text-white md:ml-20 md:pt-0 p-4">
           <Header />
+          <Banner
+                    movie={selectedMovie}
+                    onClose={() => handleCloseBanner()}
+                  />
           <div className="flex items-center justify-center h-64">
             <p className="text-white">Carregando...</p>
           </div>
@@ -78,6 +98,10 @@ export default function CategoriaExpandida() {
       <section className="min-h-screen relative flex-1 bg-[#1E1E1E] text-white md:ml-20 md:pt-0 p-4">
         <Header />
         
+        <Banner
+                  movie={selectedMovie}
+                  onClose={() => handleCloseBanner()}
+                />
         {/* Cabeçalho da categoria */}
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -100,7 +124,20 @@ export default function CategoriaExpandida() {
             <div
               key={item._id}
               className="min-w-[180px] flex-shrink-0 rounded-lg overflow-hidden cursor-pointer"
-              onClick={() => console.log('Item clicado:', item.title)}
+              onClick={() => {
+  const movieObj = {
+    _id: item._id,
+    title: item.title,
+    description: item.description,
+    releaseYear: item.releaseYear,
+    thumbnailUrl: item.thumbnailUrl,
+    videoUrl: item.videoUrl,
+    isNewRelease: item.isNewRelease,
+    isSeries: type === 'series',
+  };
+  setSelectedMovie(movieObj);
+}}
+
             >
               <Image
                 src={item.thumbnailUrl}
