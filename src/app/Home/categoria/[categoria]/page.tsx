@@ -1,4 +1,3 @@
-// src/app/Home/categoria/[categoria]/page.tsx
 'use client';
 
 import { useEffect, useState } from "react";
@@ -29,14 +28,12 @@ export default function CategoriaExpandida() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Tenta pegar os dados do estado de navegação primeiro (mais eficiente)
     if (window.history.state?.items) {
       setItems(window.history.state.items);
       setLoading(false);
       return;
     }
 
-    // Fallback: busca da API se não tiver dados no estado
     async function fetchCategoryItems() {
       try {
         const endpoint = type === 'movie' ? '/api/filmes' : '/api/series';
@@ -44,7 +41,6 @@ export default function CategoriaExpandida() {
         const data = await response.json();
 
         if (data.success) {
-          // Filtra os itens da categoria específica
           const categoryItems = data.data[categoria] || [];
           setItems(categoryItems);
         }
@@ -91,7 +87,7 @@ export default function CategoriaExpandida() {
             >
               ← Voltar
             </button>
-            <h1 className="text-3xl font-bold capitalize">{decodeURIComponent(categoria)}</h1>
+            <h1 className="text-3xl font-bold capitalize">{categoria}</h1>
             <p className="text-gray-400 mt-2">
               {items.length} {type === 'movie' ? 'filmes' : 'séries'} encontrados
             </p>
@@ -103,28 +99,23 @@ export default function CategoriaExpandida() {
           {items.map((item) => (
             <div
               key={item._id}
-              className="bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
-              onClick={() => {
-                // Aqui você pode implementar a lógica para mostrar detalhes
-                // ou reproduzir o filme/série
-                console.log('Item clicado:', item.title);
-              }}
+              className="min-w-[180px] flex-shrink-0 rounded-lg overflow-hidden cursor-pointer"
+              onClick={() => console.log('Item clicado:', item.title)}
             >
               <Image
                 src={item.thumbnailUrl}
                 alt={item.title}
                 width={200}
                 height={300}
-                className="w-full h-48 object-cover"
+                className="w-full h-60 object-cover"
               />
-              <div className="p-3">
-                <h3 className="font-semibold text-sm truncate">{item.title}</h3>
-                <p className="text-xs text-gray-400 mt-1">Ano: {item.releaseYear}</p>
-                {item.isNewRelease && (
-                  <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
-                    Novo
-                  </span>
-                )}
+              <div
+                className="p-3"
+                style={{
+                  background: "linear-gradient(to top, #0b1a3f, rgba(11,26,63,0))"
+                }}
+              >
+                <h3 className="font-semibold text-sm truncate text-white">{item.title}</h3>
               </div>
             </div>
           ))}

@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./components/sidebar";
 import Header from "./components/header";
-import Banner,{Movie} from "./components/banner";
-import  { useRouter } from "next/navigation";
+import Banner, { Movie } from "./components/banner";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-
 
 interface Series {
   _id: string;
@@ -36,15 +35,13 @@ export default function HomePage() {
     Outras: []
   });
   const [loading, setLoading] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null); 
-  const [isSearching,setIsSearching] = useState(false)
+  const [selectedMovie, setSelectedMovie] = useState<Movie | Series | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
 
   const router = useRouter();
 
   const handleExpandCategory = (category: string, type: 'movie' | 'series') => {
-    
     const encodedCategory = encodeURIComponent(category);
-
     router.push(`/Home/categoria/${encodedCategory}?type=${type}`);
   }
 
@@ -55,7 +52,6 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        
         const resMovies = await fetch("/api/filmes", { credentials: "include" });
         const dataMovies = await resMovies.json();
         if (dataMovies.success) {
@@ -64,7 +60,6 @@ export default function HomePage() {
           console.error("Erro ao buscar filmes:", dataMovies.message);
         }
 
-       
         const resSeries = await fetch("/api/series", { credentials: "include" });
         const dataSeries = await resSeries.json();
         if (dataSeries.success) {
@@ -100,17 +95,16 @@ export default function HomePage() {
         }}
       >
         <Header />
-        <Banner 
+        <Banner
           movie={selectedMovie}
-          onClose={() => handleCloseBanner()} 
+          onClose={() => handleCloseBanner()}
         />
 
         {/* Filmes */}
-        <div className="py-8 px-4 space-y-12 mt-10">
+        <div className="scroll-default py-8 px-4 space-y-12 mt-10">
           {Object.entries(moviesByCategory).map(([category, movies]: [string, Movie[]]) => (
-            <div key={category}>  
-
- <div className="flex items-center justify-between mb-4">
+            <div key={category}>
+              <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
                 <button
                   onClick={() => handleExpandCategory(category, 'movie')}
@@ -119,30 +113,29 @@ export default function HomePage() {
                   Expandir
                 </button>
               </div>
+
               <div className="flex overflow-x-auto gap-4 pb-2">
                 {movies.map((movie: Movie) => (
                   <div
                     key={movie._id}
-                    className="min-w-[180px] flex-shrink-0  rounded-lg overflow-hidden"
+                    className="min-w-[180px] flex-shrink-0 rounded-lg overflow-hidden cursor-pointer"
                     onClick={() => setSelectedMovie(movie)}
                   >
-                   <Image
-  src={movie.thumbnailUrl} 
-  alt={movie.title}
-  className="w-full h-60 object-cover"
-  width={200} //200
-  height={300} //300
-/>
-
-                    <div className="p-3">
-  <h3 className="font-semibold text-sm truncate">{movie.title}</h3>
-  <p className="text-xs text-gray-400 mt-1">Ano: {movie.releaseYear}</p>
-  {movie.isNewRelease && (
-    <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
-      Novo
-    </span>
-  )}
-</div>
+                    <Image
+                      src={movie.thumbnailUrl}
+                      alt={movie.title}
+                      className="w-full h-60 object-cover"
+                      width={200}
+                      height={300}
+                    />
+                    <div
+                      className="p-3"
+                      style={{
+                        background: "linear-gradient(to top, #0b1a3f, rgba(11,26,63,0))"
+                      }}
+                    >
+                      <h3 className="font-semibold text-sm truncate text-white">{movie.title}</h3>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -152,42 +145,43 @@ export default function HomePage() {
           {/* Séries */}
           {Object.entries(seriesByCategory).map(([category, seriesList]: [string, Series[]]) => (
             <div key={category}>
-              
-            <div className="flex items-center justify-between mb-4">
-  <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
-  <button
-    onClick={() => handleExpandCategory(category, 'series')}
-    className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors"
-  >
-    Expandir
-  </button>
-</div>
-              <div className="flex overflow-x-auto gap-4 pb-2">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl md:text-2xl font-bold">{category}</h2>
+                <button
+                  onClick={() => handleExpandCategory(category, 'series')}
+                  className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors"
+                >
+                  Expandir
+                </button>
+              </div>
+
+              <div className="scroll-default flex overflow-x-auto gap-4 pb-2">
                 {seriesList.map((series: Series) => (
-                 <div
-  key={series._id}
-  className="min-w-[180px] flex-shrink-0 bg-[#2A2A2A] rounded-lg overflow-hidden hover:scale-105 transition-transform cursor-pointer"
-  onClick={() => setSelectedMovie(series)}
->
-
+                  <div
+                    key={series._id}
+                    className="min-w-[180px] flex-shrink-0 rounded-lg overflow-hidden cursor-pointer"
+                    onClick={() => setSelectedMovie(series)}
+                  >
                     <Image
-  src={series.thumbnailUrl} 
-  alt={series.title}
-  className="w-full h-48 object-cover"
-  width={200}
-  height={300}
-/>
-
-                    <div className="p-3">
-  <h3 className="font-semibold text-sm truncate">{series.title}</h3>
-  
-  {series.isNewRelease && (
-    <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
-      Novo
-    </span>
-  )}
-</div>
-
+                      src={series.thumbnailUrl}
+                      alt={series.title}
+                      className="w-full h-60 object-cover"
+                      width={200}
+                      height={300}
+                    />
+                    <div
+                      className="p-3"
+                      style={{
+                        background: "linear-gradient(to top, #0b1a3f, rgba(11,26,63,0))"
+                      }}
+                    >
+                      <h3 className="font-semibold text-sm truncate text-white">{series.title}</h3>
+                      {series.isNewRelease && (
+                        <span className="inline-block mt-2 px-2 py-1 bg-green-600 text-white text-xs rounded">
+                          Novo
+                        </span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
