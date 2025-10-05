@@ -68,7 +68,7 @@ export default function CategoriaExpandida() {
     }
   }, [categoria, type]);
 
-  const handleBack = () => router.back();
+  const handleBack = () => router.push('/Home');
 
    const handleCloseBanner = () => {
     setSelectedMovie(null);
@@ -103,14 +103,19 @@ export default function CategoriaExpandida() {
                   onClose={() => handleCloseBanner()}
                 />
         {/* Cabeçalho da categoria */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 mt-20">
           <div>
-            <button 
-              onClick={handleBack}
-              className="mb-4 flex items-center text-gray-400 hover:text-white transition-colors"
-            >
-              ← Voltar
-            </button>
+            <button
+  onClick={handleBack}
+  className="
+    mb-4 flex items-center gap-2 px-4 py-2 
+    bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white 
+    rounded-lg shadow-md transition-all duration-200
+  "
+>
+  ← Voltar
+</button>
+
             <h1 className="text-3xl font-bold capitalize">{categoria}</h1>
             <p className="text-gray-400 mt-2">
               {items.length} {type === 'movie' ? 'filmes' : 'séries'} encontrados
