@@ -1,22 +1,10 @@
 // lib/moviePosterCacheSimplified.ts
-
-export interface Movie {
-  _id: string;
-  title: string;
-  description: string;
-  releaseYear: number;
-  thumbnailUrl: string;
-  videoUrl: string;
-  isNewRelease: boolean;
-  isSeries?: boolean;
-}
+import { Movie } from '../types/movie';
 
 class MoviePosterCacheSimplified {
   private imageCache: Map<string, string> = new Map();
-  
-  // 🎯 GAMBIARRA CONFIGURÁVEL - AGORA SEM READonly
-  private TOTAL_SIZE_MB: number = 7;        // Tamanho total dos seus posters
-  private LIMITE_SEGURO_MB: number = 30;    // Seu limite seguro de RAM
+  private TOTAL_SIZE_MB: number = 7;
+  private LIMITE_SEGURO_MB: number = 30;
   private isCacheEnabled: boolean = true;
 
   constructor() {
@@ -24,9 +12,6 @@ class MoviePosterCacheSimplified {
     this.setupCleanupEvents();
   }
 
-  /**
-   * 🛡️ VERIFICA SE PODE USAR CACHE SEM CULPA NA CONSCIÊNCIA
-   */
   private verificarLimiteSeguro(): void {
     if (this.TOTAL_SIZE_MB > this.LIMITE_SEGURO_MB) {
       this.isCacheEnabled = false;
@@ -67,7 +52,7 @@ class MoviePosterCacheSimplified {
     console.log(`🚀 Cacheando ${moviesData.length} posters...`);
 
     const updatedMovies = await Promise.all(
-      moviesData.map(async (movie): Promise<Movie> => {
+      moviesData.map(async (movie) => {
         if (movie.thumbnailUrl) {
           const cachedUrl = await this.cachePosterImage(movie.thumbnailUrl);
           return { ...movie, thumbnailUrl: cachedUrl };
@@ -98,9 +83,6 @@ class MoviePosterCacheSimplified {
     return url.split('/').pop() || url;
   }
 
-  /**
-   * 📊 RETORNA STATUS DO CACHE + INFO DA GAMBIARRA
-   */
   public getStatus() {
     return {
       cacheAtivo: this.isCacheEnabled,
@@ -110,14 +92,26 @@ class MoviePosterCacheSimplified {
     };
   }
 
-  /**
-   * 🔧 MÉTODO PARA ATUALIZAR OS VALORES DA GAMBIARRA
-   */
   public atualizarConfiguracao(novoTotalMB: number, novoLimiteMB: number): void {
     this.TOTAL_SIZE_MB = novoTotalMB;
     this.LIMITE_SEGURO_MB = novoLimiteMB;
-    this.verificarLimiteSeguro(); // Re-verifica com novos valores
+    this.verificarLimiteSeguro();
   }
 }
 
-export const moviePosterCache = new MoviePosterCacheSimplified();
+// Cria e exporta a instância única
+const moviePosterCache = new MoviePosterCacheSimplified();
+
+// Interface para a propriedade global
+declare global {
+  interface Window {
+    moviePosterCache: MoviePosterCacheSimplified;
+  }
+}
+
+// Torna global para fácil acesso
+if (typeof window !== 'undefined') {
+  window.moviePosterCache = moviePosterCache;
+}
+
+export { moviePosterCache };
